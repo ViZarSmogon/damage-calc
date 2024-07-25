@@ -9623,8 +9623,8 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     otherFormes: ['Palafin-Hero'],
   },
   'Palafin-Hero': {
-    types: ['Water'],
-    bs: {hp: 100, at: 160, df: 97, sa: 106, sd: 87, sp: 100},
+    types: ['Water', 'Fighting'],
+    bs: {hp: 100, at: 120, df: 135, sa: 83, sd: 92, sp: 60},
     weightkg: 97.4,
     abilities: {0: 'Zero to Hero'},
     baseSpecies: 'Palafin',
