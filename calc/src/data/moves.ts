@@ -3621,7 +3621,12 @@ const SS_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 130,
   },
   'Stuff Cheeks': {bp: 0, type: 'Normal'},
-  'Tar Shot': {bp: 0, type: 'Rock'},
+  'Tar Shot': {
+    bp: 80,
+    type: 'Rock',
+    category: 'Special',
+    secondaries: true,
+  },
   Teatime: {bp: 0, type: 'Normal'},
   'Thunder Cage': {
     bp: 80,

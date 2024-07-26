@@ -4087,7 +4087,8 @@ var SETDEX_SV = {
     "Almost Any Ability Palafin": {"ability":"Zero to Hero","item":"Choice Band","nature":"Adamant","evs":{"at":252,"df":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Zen Headbutt"]},
     "Ubers UU Choice Band": {"ability":"Zero to Hero","item":"Choice Band","nature":"Adamant","teraType":"Water","evs":{"hp":248,"at":252,"sp":8},"moves":["Jet Punch","Wave Crash","Close Combat","Flip Turn"]},
     "Ubers UU Bulk Up": {"ability":"Zero to Hero","item":"Leftovers","nature":"Careful","teraType":"Fairy","evs":{"hp":248,"at":8,"sd":252},"moves":["Jet Punch","Bulk Up","Drain Punch","Taunt"]},
-    "National Dex Doubles Showdown Usage": {"ability":"Zero to Hero","item":"Choice Band","nature":"Jolly","teraType":"Water","evs":{"at":252,"sd":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Close Combat"]}
+    "National Dex Doubles Showdown Usage": {"ability":"Zero to Hero","item":"Choice Band","nature":"Jolly","teraType":"Water","evs":{"at":252,"sd":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Close Combat"]},
+    "TeraMax Bulk Up": {"ability":"Zero to Hero","item":"Leftovers","nature":"Careful","teraType":"Grass","evs":{"hp":248,"df":60,"sd":140,"sp":60},"moves":["Jet Punch","Bulk Up","Drain Punch","Taunt"]}
   },
   "Palafin-Hero": {
     "Ubers Choice Band": {"ability":"Zero to Hero","item":"Choice Band","nature":"Adamant","teraType":"Water","evs":{"at":252,"df":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Zen Headbutt"]},
@@ -4100,7 +4101,8 @@ var SETDEX_SV = {
     "Almost Any Ability Palafin": {"ability":"Zero to Hero","item":"Choice Band","nature":"Adamant","evs":{"at":252,"df":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Zen Headbutt"]},
     "Ubers UU Choice Band": {"ability":"Zero to Hero","item":"Choice Band","nature":"Adamant","teraType":"Water","evs":{"hp":248,"at":252,"sp":8},"moves":["Jet Punch","Wave Crash","Close Combat","Flip Turn"]},
     "Ubers UU Bulk Up": {"ability":"Zero to Hero","item":"Leftovers","nature":"Careful","teraType":"Fairy","evs":{"hp":248,"at":8,"sd":252},"moves":["Jet Punch","Bulk Up","Drain Punch","Taunt"]},
-    "National Dex Doubles Showdown Usage": {"ability":"Zero to Hero","item":"Choice Band","nature":"Jolly","teraType":"Water","evs":{"at":252,"sd":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Close Combat"]}
+    "National Dex Doubles Showdown Usage": {"ability":"Zero to Hero","item":"Choice Band","nature":"Jolly","teraType":"Water","evs":{"at":252,"sd":4,"sp":252},"moves":["Jet Punch","Flip Turn","Wave Crash","Close Combat"]},
+    "TeraMax Bulk Up": {"ability":"Zero to Hero","item":"Leftovers","nature":"Careful","teraType":"Grass","evs":{"hp":248,"df":60,"sd":140,"sp":60},"moves":["Jet Punch","Bulk Up","Drain Punch","Taunt"]}
   },
   "Revavroom": {
     "RU Shift Gear": {"ability":"Filter","item":"Air Balloon","nature":"Adamant","teraType":"Ground","evs":{"at":252,"sd":4,"sp":252},"moves":["Shift Gear","Gunk Shot","High Horsepower","Iron Head"]},

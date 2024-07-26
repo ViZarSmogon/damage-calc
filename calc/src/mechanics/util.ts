@@ -115,7 +115,7 @@ export function getFinalSpeed(gen: Generation, pokemon: Pokemon, field: Field, s
     speedMods.push(6144);
   }
 
-  if (pokemon.hasItem('Choice Scarf')) {
+  if (pokemon.hasItem('Choice Scarf') && !pokemon.hasAbility('Gorilla Tactics')) {
     speedMods.push(6144);
   } else if (pokemon.hasItem('Iron Ball', ...EV_ITEMS)) {
     speedMods.push(2048);
@@ -146,6 +146,8 @@ export function getMoveEffectiveness(
     return 1;
   } else if (move.named('Freeze-Dry') && type === 'Water') {
     return 2;
+  } else if (move.named('Hyper Drill') && (type === 'Rock' || type === 'Steel')) {
+    return 1;
   } else if (move.named('Flying Press')) {
     return (
       gen.types.get('fighting' as ID)!.effectiveness[type]! *
@@ -588,11 +590,11 @@ export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
   }
   const teraType = pokemon.teraType;
   if (teraType === move.type && teraType !== 'Stellar') {
-    stabMod += 2048;
+    stabMod += 2340;
     desc.attackerTera = teraType;
   }
   if (pokemon.hasAbility('Adaptability') && pokemon.hasType(move.type)) {
-    stabMod += teraType && pokemon.hasOriginalType(teraType) ? 1024 : 2048;
+    stabMod += teraType && pokemon.hasOriginalType(teraType) ? 1024 : 2340;
     desc.attackerAbility = pokemon.ability;
   }
   return stabMod;
@@ -604,7 +606,7 @@ export function getStellarStabMod(pokemon: Pokemon, move: Move, stabMod = 1, tur
     ((move.isStellarFirstUse && turns === 0) || pokemon.named('Terapagos-Stellar'));
   if (isStellarBoosted) {
     if (pokemon.hasOriginalType(move.type)) {
-      stabMod += 2048;
+      stabMod += 2340;
     } else {
       stabMod = 4915;
     }

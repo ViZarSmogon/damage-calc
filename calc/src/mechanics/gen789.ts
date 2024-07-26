@@ -1149,7 +1149,9 @@ export function calculateBPModsSMSSSV(
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
-    (attacker.hasAbility('Punk Rock') && move.flags.sound)
+    (attacker.hasAbility('Punk Rock') && move.flags.sound) ||
+	(attacker.hasAbility('Gale Wings') && (turnOrder !== 'last' || field.defenderSide.isSwitching === 'out')) ||
+	(attacker.hasAbility('Commander') && ((turnOrder !== 'last' || field.defenderSide.isSwitching === 'out') && defender.hasType('Water', 'Dragon')))
   ) {
     bpMods.push(5325);
     desc.attackerAbility = attacker.ability;
@@ -1183,7 +1185,8 @@ export function calculateBPModsSMSSSV(
   }
 
   if ((attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage)) ||
-      (attacker.hasAbility('Iron Fist') && move.flags.punch)
+      (attacker.hasAbility('Iron Fist') && move.flags.punch) ||
+	  (attacker.hasAbility('Commander') && (turnOrder !== 'last' || field.defenderSide.isSwitching === 'out'))
   ) {
     bpMods.push(4915);
     desc.attackerAbility = attacker.ability;
@@ -1373,7 +1376,9 @@ export function calculateAtModsSMSSSV(
 
   if ((defender.hasAbility('Thick Fat') && move.hasType('Fire', 'Ice')) ||
       (defender.hasAbility('Water Bubble') && move.hasType('Fire')) ||
-     (defender.hasAbility('Purifying Salt') && move.hasType('Ghost'))) {
+     (defender.hasAbility('Purifying Salt') && move.hasType('Ghost')) ||
+	 (defender.hasAbility('Steam Engine') && move.hasType('Fire', 'Water'))
+	 ) {
     atMods.push(2048);
     desc.defenderAbility = defender.ability;
   }
@@ -1431,8 +1436,8 @@ export function calculateAtModsSMSSSV(
     desc.attackerItem = attacker.item;
     // Choice Band/Scarf/Specs move lock and stat boosts are ignored during Dynamax (Anubis)
   } else if (!move.isZ && !move.isMax &&
-    ((attacker.hasItem('Choice Band') && move.category === 'Physical') ||
-      (attacker.hasItem('Choice Specs') && move.category === 'Special'))
+    (((attacker.hasItem('Choice Band') && move.category === 'Physical') ||
+      (attacker.hasItem('Choice Specs') && move.category === 'Special')) && !attacker.hasAbility('Gorilla Tactics'))
   ) {
     atMods.push(6144);
     desc.attackerItem = attacker.item;
@@ -1532,7 +1537,7 @@ export function calculateDfModsSMSSSV(
     desc.defenderAbility = defender.ability;
   }
   // Pokemon with "-of Ruin" Ability are immune to the opposing "-of Ruin" ability
-  const isSwordOfRuinActive = (attacker.hasAbility('Sword of Ruin') || field.isSwordOfRuin) &&
+  /*const isSwordOfRuinActive = (attacker.hasAbility('Sword of Ruin') || field.isSwordOfRuin) &&
     !defender.hasAbility('Sword of Ruin');
   const isBeadsOfRuinActive = (attacker.hasAbility('Beads of Ruin') || field.isBeadsOfRuin) &&
     !defender.hasAbility('Beads of Ruin');
@@ -1544,6 +1549,18 @@ export function calculateDfModsSMSSSV(
       desc.attackerAbility = attacker.ability;
     } else {
       desc[hitsPhysical ? 'isSwordOfRuin' : 'isBeadsOfRuin'] = true;
+    }
+    dfMods.push(3072);
+  }*/
+  const isSwordOfRuinActive = (attacker.hasAbility('Sword of Ruin') || field.isSwordOfRuin) &&
+    !defender.hasAbility('Sword of Ruin');
+  if (
+    (isSwordOfRuinActive && hitsPhysical)
+  ) {
+    if (attacker.hasAbility('Sword of Ruin')) {
+      desc.attackerAbility = attacker.ability;
+    } else {
+      desc['isSwordOfRuin'] = true;
     }
     dfMods.push(3072);
   }
