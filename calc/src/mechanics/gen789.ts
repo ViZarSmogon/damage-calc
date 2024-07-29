@@ -462,10 +462,10 @@ export function calculateSMSSSV(
     return result;
   }
 
-  const weightBasedMove = move.named('Heat Crash', 'Heavy Slam', 'Low Kick', 'Grass Knot');
+  /*const weightBasedMove = move.named('Heat Crash', 'Heavy Slam', 'Low Kick', 'Grass Knot');
   if (defender.isDynamaxed && weightBasedMove) {
     return result;
-  }
+  }*/
 
   desc.HPEVs = getStatDescriptionText(gen, defender, 'hp');
 
@@ -1712,6 +1712,11 @@ export function calculateFinalModsSMSSSV(
   if (defender.hasAbility('Solid Rock', 'Filter', 'Prism Armor') && typeEffectiveness > 1) {
     finalMods.push(3072);
     desc.defenderAbility = defender.ability;
+  }
+  //Dmax multiplier on Tera
+  if (defender.teraType && attacker.isDynamaxed) {
+    finalMods.push(3072);
+    desc.defenderTera = defender.teraType;
   }
 
   if (field.defenderSide.isFriendGuard) {

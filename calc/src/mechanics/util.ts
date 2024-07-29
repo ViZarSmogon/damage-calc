@@ -148,6 +148,8 @@ export function getMoveEffectiveness(
     return 2;
   } else if (move.named('Hyper Drill') && (type === 'Rock' || type === 'Steel')) {
     return 1;
+  } else if (move.named('G-Max Resonance') && type === 'Water') {
+    return 2;
   } else if (move.named('Flying Press')) {
     return (
       gen.types.get('fighting' as ID)!.effectiveness[type]! *
@@ -590,11 +592,11 @@ export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
   }
   const teraType = pokemon.teraType;
   if (teraType === move.type && teraType !== 'Stellar') {
-    stabMod += 2340;
+    stabMod += 1024;//1.25x Tera boost
     desc.attackerTera = teraType;
   }
   if (pokemon.hasAbility('Adaptability') && pokemon.hasType(move.type)) {
-    stabMod += teraType && pokemon.hasOriginalType(teraType) ? 1024 : 2340;
+    stabMod += teraType && pokemon.hasOriginalType(teraType) ? 1024 : 2048;
     desc.attackerAbility = pokemon.ability;
   }
   return stabMod;
@@ -606,9 +608,9 @@ export function getStellarStabMod(pokemon: Pokemon, move: Move, stabMod = 1, tur
     ((move.isStellarFirstUse && turns === 0) || pokemon.named('Terapagos-Stellar'));
   if (isStellarBoosted) {
     if (pokemon.hasOriginalType(move.type)) {
-      stabMod += 2340;
+      stabMod += 1024;//1.75x Stellar boost
     } else {
-      stabMod = 4915;
+      stabMod = 4915;//1.2x Stellar boost
     }
   }
   return stabMod;

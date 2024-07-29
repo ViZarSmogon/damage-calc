@@ -254,7 +254,46 @@ export function getMaxMoveName(
 ) {
   if (isStatus) return 'Max Guard';
   if (pokemonAbility === 'Normalize') return 'Max Strike';
-  if (moveType === 'Fire') {
+  if (moveType === 'Normal' && !(moveName === 'Weather Ball' || moveName === 'Terrain Pulse')) {
+    if (pokemonAbility === 'Pixilate') return 'Max Starfall';
+    if (pokemonAbility === 'Aerilate') return 'Max Airstream';
+    if (pokemonAbility === 'Refrigerate') return 'Max Hailstorm';
+    if (pokemonAbility === 'Galvanize') return 'Max Lightning';
+  }
+  if (moveName === 'Frenzy Plant' && pokemonSpecies === 'Venusaur-Gmax') return 'G-Max Vine Lash';
+  if (moveName === 'Blast Burn' && pokemonSpecies === 'Charizard-Gmax') return 'G-Max Wildfire';
+  if (moveName === 'Hydro Cannon' && pokemonSpecies === 'Blastoise-Gmax') return 'G-Max Cannonade';
+  if (moveName === 'Pollen Puff' && pokemonSpecies === 'Butterfree-Gmax') return 'G-Max Befuddle';
+  if (moveName === 'Volt Tackle' && pokemonSpecies === 'Pikachu-Gmax') return 'G-Max Volt Crash';
+  if (moveName === 'Pay Day' && pokemonSpecies === 'Meowth-Gmax') return 'G-Max Gold Rush';
+  if (moveName === 'Dynamic Punch' && pokemonSpecies === 'Machamp-Gmax') return 'G-Max Chi Strike';
+  if (moveName === 'Shadow Ball' && pokemonSpecies === 'Gengar-Gmax') return 'G-Max Terror';
+  if (moveName === 'Crabhammer' && pokemonSpecies === 'Kingler-Gmax') return 'G-Max Foam Burst';
+  if (moveName === 'Freeze-Dry' && pokemonSpecies === 'Lapras-Gmax') return 'G-Max Resonance';
+  if (moveName === 'Last Resort' && pokemonSpecies === 'Eevee-Gmax') return 'G-Max Cuddle';
+  if (moveName === 'Body Slam' && pokemonSpecies === 'Snorlax-Gmax') return 'G-Max Replenish';
+  if (moveName === 'Gunk Shot' && pokemonSpecies === 'Garbodor-Gmax') return 'G-Max Malodor';
+  if (moveName === 'Double Iron Bash' && pokemonSpecies === 'Melmetal-Gmax') return 'G-Max Meltdown';
+  if (moveName === 'Drum Beating' && pokemonSpecies === 'Rillaboom-Gmax') return 'G-Max Drum Solo';
+  if (moveName === 'Pyro Ball' && pokemonSpecies === 'Cinderace-Gmax') return 'G-Max Fireball';
+  if (moveName === 'Snipe Shot' && pokemonSpecies === 'Inteleon-Gmax') return 'G-Max Hydrosnipe';
+  if (moveName === 'Brave Bird' && pokemonSpecies === 'Corviknight-Gmax') return 'G-Max Wind Rage';
+  if (moveName === 'Psychic' && pokemonSpecies === 'Orbeetle-Gmax') return 'G-Max Gravitas';
+  if (moveName === 'Razor Shell' && pokemonSpecies === 'Drednaw-Gmax') return 'G-Max Stonesurge';
+  if (moveName === 'Tar Shot' && pokemonSpecies === 'Coalossal-Gmax') return 'G-Max Volcalith';
+  if (moveName === 'Grav Apple' && pokemonSpecies === 'Flapple-Gmax') return 'G-Max Tartness';
+  if (moveName === 'Apple Acid' && pokemonSpecies === 'Appletun-Gmax') return 'G-Max Sweetness';
+  if (moveName === 'Sand Tomb' && pokemonSpecies === 'Sandaconda-Gmax') return 'G-Max Sandblast';
+  if (moveName === 'Fire Lash' && pokemonSpecies === 'Centiskorch-Gmax') return 'G-Max Centiferno';
+  if (moveName === 'Overdrive' && pokemonSpecies?.startsWith('Toxtricity') && pokemonSpecies?.endsWith('Gmax')) return 'G-Max Stun Shock';
+  if (moveName === 'Dazzling Gleam' && pokemonSpecies === 'Hatterene-Gmax') return 'G-Max Smite';
+  if (moveName === 'False Surrender' && pokemonSpecies === 'Grimmsnarl-Gmax') return 'G-Max Snooze';
+  if (moveName === 'Draining Kiss' && pokemonSpecies === 'Alcremie-Gmax') return 'G-Max Finale';
+  if (moveName === 'Heavy Slam' && pokemonSpecies === 'Copperajah-Gmax') return 'G-Max Steelsurge';
+  if (moveName === 'Draco Meteor' && pokemonSpecies === 'Duraludon-Gmax') return 'G-Max Depletion';
+  if (moveName === 'Wicked Blow' && pokemonSpecies === 'Urshifu-Gmax') return 'G-Max One Blow';
+  if (moveName === 'Surging Strikes' && pokemonSpecies === 'Urshifu-Rapid-Strike-Gmax') return 'G-Max Rapid Flow';
+  /*if (moveType === 'Fire') {
     if (pokemonSpecies === 'Charizard-Gmax') return 'G-Max Wildfire';
     if (pokemonSpecies === 'Centiskorch-Gmax') return 'G-Max Centiferno';
     if (pokemonSpecies === 'Cinderace-Gmax') return 'G-Max Fire Ball';
@@ -309,7 +348,7 @@ export function getMaxMoveName(
   if (moveType === 'Psychic' && pokemonSpecies === 'Orbeetle-Gmax') return 'G-Max Gravitas';
   if (moveType === 'Rock' && pokemonSpecies === 'Coalossal-Gmax') return 'G-Max Volcalith';
   if (moveType === 'Ground' && pokemonSpecies === 'Sandaconda-Gmax') return 'G-Max Sandblast';
-  if (moveType === 'Dark' && pokemonSpecies === 'Grimmsnarl-Gmax') return 'G-Max Snooze';
+  if (moveType === 'Dark' && pokemonSpecies === 'Grimmsnarl-Gmax') return 'G-Max Snooze';*/
   return 'Max ' + MAXMOVES_TYPING[moveType];
 }
 

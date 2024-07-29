@@ -110,7 +110,8 @@ export class Pokemon implements State.Pokemon {
   maxHP(original = false) {
     // Shedinja still has 1 max HP during the effect even if its Dynamax Level is maxed (DaWoblefet)
     if (!original && this.isDynamaxed && this.species.baseStats.hp !== 1) {
-      return Math.floor((this.rawStats.hp * (150 + 5 * this.dynamaxLevel!)) / 100);
+	  //return Math.floor((this.rawStats.hp * (150 + 5 * this.dynamaxLevel!)) / 100);
+	  return Math.floor(this.rawStats.hp * (150 / 100));
     }
 
     return this.rawStats.hp;
@@ -119,7 +120,8 @@ export class Pokemon implements State.Pokemon {
   curHP(original = false) {
     // Shedinja still has 1 max HP during the effect even if its Dynamax Level is maxed (DaWoblefet)
     if (!original && this.isDynamaxed && this.species.baseStats.hp !== 1) {
-      return Math.ceil((this.originalCurHP * (150 + 5 * this.dynamaxLevel!)) / 100);
+      //return Math.ceil((this.originalCurHP * (150 + 5 * this.dynamaxLevel!)) / 100);
+	  return Math.ceil(this.originalCurHP * (150 / 100));
     }
 
     return this.originalCurHP;
