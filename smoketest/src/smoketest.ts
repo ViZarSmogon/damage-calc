@@ -102,6 +102,9 @@ function createCalcField(battle: Battle, field: Field, sides: [Side, Side]) {
     isSwordOfRuin: battle.abilityActive(['swordofruin'] as ID[]),
     isTabletsOfRuin: battle.abilityActive(['tabletsofruin'] as ID[]),
     isVesselOfRuin: battle.abilityActive(['vesselofruin'] as ID[]),
+	isGrindset: battle.abilityActive(['grindset'] as ID[]),
+    isSpongeOfRuin: battle.abilityActive(['spongeofruin'] as ID[]),
+    isLawnmowerOfRuin: battle.abilityActive(['lawnmowerofruin'] as ID[]),
     attackerSide: createCalcSide(sides[0]),
     defenderSide: createCalcSide(sides[1]),
   });

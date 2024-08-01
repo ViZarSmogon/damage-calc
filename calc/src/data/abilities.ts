@@ -337,6 +337,98 @@ const SV = SS.concat([
   'Wind Power',
   'Wind Rider',
   'Zero to Hero',
+  
+  //FESV
+  'Unfiltered',//DONE
+  'Holy Grail',//DONE
+  'All-Devouring',//DONE
+  'Galvanic Relay',//DONE
+  'Forest Fury',//DONE
+  'Light Drive',//DONE
+  'Scrap Rock',//DONE
+  'Opening Act',//DONE
+  'Necromancer',//DONE
+  'Regain Patience',//DONE
+  'Quark Surge',//DONE
+  'Once Upon a Time',//DONE
+  'Primitive',//DONE
+  'System Purge',//DONE
+  'Mad Cow',//DONE
+  'Choreography',//DONE
+  'Squall',//DONE
+  'Stone Wheel',//DONE
+  'Molten Core',//DONE
+  'Eczema',//DONE
+  'Aura Shield',//DONE
+  'Faulty Photon',//DONE
+  'Firewall',//DONE
+  'Nanorepairs',//DONE
+  'Iron Sights',//DONE
+  'Rejuvenate',//DONE
+  'Electromagnetic Veil',//DONE
+  'Rising Tension',//DONE
+  'Grindset',//DONE
+  'Shocking Fright',//DONE
+  'Weight of Life',//DONE
+  'Circuit Breaker',//DONE
+  'Natural Pressures',//DONE
+  'Vital Metal Body',//DONE
+  'Fortunomorphosis',//DONE
+  'Rebel\'s Blade',//DONE
+  'Burning Petals',//DONE
+  'Snowblind',//DONE
+  'Slushie',//DONE
+  'Sand Wrath',//DONE
+  'Pondweed',//DONE
+  'Frisk Exchange',//DONE
+  'Free Flight',//DONE
+  'Pillage',//DONE
+  'Fat Fingers',//DONE
+  'Hourglass',//DONE
+  'Force of Nature',//DONE
+  'Airborne Armor',//DONE
+  'Bleeding Edge',//DONE
+  'Ancient Marble',//DONE
+  'Prehistoric Hunter',//DONE
+  'Sponge of Ruin',//DONE
+  'Overwhelming',//DONE
+  'Lawnmower of Ruin',//DONE
+  'Barbed Chain',//DONE
+  'Steamy Scales',//DONE
+  'Hellkite',//DONE
+  'Winter Storm',//DONE
+  'Well-Baked Flame Orb',//DONE
+  'Air Control',//DONE
+  'Lively Locks',//TO-DO maybe
+  'Sharp Goggles',//DONE
+  'Heatproof Drive',//DONE
+  'Dyschronometria',//TO-DO maybe
+  'Mercury Pulse',//DONE
+  'Armor Fist',//DONE
+  'Forced Fencer',//DONE
+  'Mind Domain',//DONE
+  'Storm Clinic',//DONE
+  'Ultra Face',//DONE
+  'Emperor\'s Clothes',//DONE
+  'No Nonsense',//DONE
+  'Magnetic Storm',//DONE
+  'Ultra Impulse',//DONE
+  'Hydrotechnic',//DONE
+  'Magnetize',//DONE
+  'Daunting Storm',//DONE
+  'Shear Strength',//DONE
+  'Suppressive Fire',//DONE
+  'Numbskull',//DONE
+  'Apple of Ruin',//DONE
+  'Innovate',//DONE
+  'Best Boost',//TO-DO maybe
+  'Rogue',//DONE
+  'Unidentified Flying Object',//DONE
+  'Rough Image',//DONE
+  'Riot Payload',//DONE
+  'Toxic Attitude',//DONE
+  'Quickstart',//DONE
+  'Reachless',//DONE
 ]);
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

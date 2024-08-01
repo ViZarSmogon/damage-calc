@@ -268,7 +268,16 @@ $(".ability").bind("keyup change", function () {
 		$(this).closest(".poke-info").find(moveSelector).find(".move-hits").val(moveHits);
 	}
 
-	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout', 'Teraform Zero'];
+	var TOGGLE_ABILITIES = ['Flash Fire', 'Intimidate', 'Minus', 'Plus', 'Slow Start', 'Unburden', 'Stakeout', 'Teraform Zero', 'Forest\'s Curse', 
+	//FE OU
+	'System Purge', 'Mad Cow', 'Shocking Fright', 'Burning Petals', 
+	
+	//FE UU
+	'Daunting Storm', 'Suppressive Fire',
+	
+	//FELC
+	'Quickstart',
+	];
 
 	if (TOGGLE_ABILITIES.indexOf(ability) >= 0) {
 		$(this).closest(".poke-info").find(".abilityToggle").show();
@@ -277,7 +286,9 @@ $(".ability").bind("keyup change", function () {
 	}
 	var boostedStat = $(this).closest(".poke-info").find(".boostedStat");
 
-	if (ability === "Protosynthesis" || ability === "Quark Drive") {
+	if (ability === "Protosynthesis" || ability === "Quark Drive" || ability === "Light Drive" || ability === "Opening Act" || ability === "Quark Surge" || ability === "Once Upon a Time" || ability === "Primitive" || 
+		ability === "System Purge" || ability === "Faulty Photon" || ability === "Firewall" || ability === "Nanorepairs" || ability === "Weight of Life" || ability === "Circuit Breaker" || ability === "Ancient Marble" || 
+		ability === "Prehistoric Hunter" || ability === "Heatproof Drive" || ability === "Innovate") {
 		boostedStat.show();
 		autosetQP($(this).closest(".poke-info"));
 	} else {
@@ -285,7 +296,7 @@ $(".ability").bind("keyup change", function () {
 		boostedStat.hide();
 	}
 
-	if (ability === "Supreme Overlord") {
+	if (ability === "Supreme Overlord" || ability === "Emperor\'s Clothes") {
 		$(this).closest(".poke-info").find(".alliesFainted").show();
 	} else {
 		$(this).closest(".poke-info").find(".alliesFainted").val('0');
@@ -305,8 +316,9 @@ function autosetQP(pokemon) {
 	if (!boostedStat || boostedStat === "auto") {
 		if (
 			(item === "Booster Energy") ||
-			(ability === "Protosynthesis" && currentWeather === "Sun") ||
-			(ability === "Quark Drive" && currentTerrain === "Electric")
+			((ability === "Protosynthesis" || ability === "Opening Act" || ability === "Once Upon a Time" || ability === "Primitive" || ability === "Weight of Life" || ability === "Ancient Marble" || ability === "Prehistoric Hunter") && currentWeather === "Sun") ||
+			((ability === "Quark Drive" || ability === "Light Drive" || ability === "Quark Surge" || ability === "Faulty Photon" || ability === "Firewall" || ability === "Nanorepairs" || ability === "Circuit Breaker" || ability === "Heatproof Drive" || ability === "Innovate") && currentTerrain === "Electric") ||
+			(ability === "System Purge" && abilityOn)
 		) {
 			pokemon.find(".boostedStat").val("auto");
 		} else {
@@ -343,14 +355,17 @@ function autosetWeather(ability, i) {
 		$("#sun").prop("checked", true);
 		break;
 	case "Drizzle":
+	case "Mercury Pulse":
 		lastAutoWeather[i] = "Rain";
 		$("#rain").prop("checked", true);
 		break;
 	case "Sand Stream":
+	case "Sand Wrath":
 		lastAutoWeather[i] = "Sand";
 		$("#sand").prop("checked", true);
 		break;
 	case "Snow Warning":
+	case "Snowblind":
 		if (gen >= 9) {
 			lastAutoWeather[i] = "Snow";
 			$("#snow").prop("checked", true);
@@ -399,10 +414,12 @@ function autosetTerrain(ability, i) {
 	switch (ability) {
 	case "Electric Surge":
 	case "Hadron Engine":
+	case "Quark Surge":
 		lastAutoTerrain[i] = "Electric";
 		$("#electric").prop("checked", true);
 		break;
 	case "Grassy Surge":
+	case "Force of Nature":
 		lastAutoTerrain[i] = "Grassy";
 		$("#grassy").prop("checked", true);
 		break;
@@ -411,6 +428,7 @@ function autosetTerrain(ability, i) {
 		$("#misty").prop("checked", true);
 		break;
 	case "Psychic Surge":
+	case "Mind Domain":
 		lastAutoTerrain[i] = "Psychic";
 		$("#psychic").prop("checked", true);
 		break;
@@ -1161,6 +1179,9 @@ function createField() {
 	var isTabletsOfRuin = $("#tablets").prop("checked");
 	var isSwordOfRuin = $("#sword").prop("checked");
 	var isVesselOfRuin = $("#vessel").prop("checked");
+	var isGrindset = $("#grindset").prop("checked");
+	var isSpongeOfRuin = $("#sponge").prop("checked");
+	var isLawnmowerOfRuin = $("#lawnmower").prop("checked");
 	var isMagicRoom = $("#magicroom").prop("checked");
 	var isWonderRoom = $("#wonderroom").prop("checked");
 	var isGravity = $("#gravity").prop("checked");
@@ -1210,6 +1231,7 @@ function createField() {
 		isMagicRoom: isMagicRoom, isWonderRoom: isWonderRoom, isGravity: isGravity,
 		isBeadsOfRuin: isBeadsOfRuin, isTabletsOfRuin: isTabletsOfRuin,
 		isSwordOfRuin: isSwordOfRuin, isVesselOfRuin: isVesselOfRuin,
+		isGrindset: isGrindset, isSpongeOfRuin: isSpongeOfRuin, isLawnmowerOfRuin: isLawnmowerOfRuin,
 		attackerSide: createSide(0), defenderSide: createSide(1)
 	});
 }
@@ -1579,6 +1601,14 @@ function isPokeInfoGrounded(pokeInfo) {
 		  teraType ? teraType !== "Flying" : pokeInfo.find(".type1").val() !== "Flying" &&
         teraType ? teraType !== "Flying" : pokeInfo.find(".type2").val() !== "Flying" &&
         pokeInfo.find(".ability").val() !== "Levitate" &&
+		pokeInfo.find(".ability").val() !== "Holy Grail" &&
+		pokeInfo.find(".ability").val() !== "Rising Tension" &&
+		pokeInfo.find(".ability").val() !== "Free Flight" &&
+		pokeInfo.find(".ability").val() !== "Airborne Armor" &&
+		pokeInfo.find(".ability").val() !== "Hellkite" &&
+		pokeInfo.find(".ability").val() !== "Air Control" &&
+		pokeInfo.find(".ability").val() !== "Magnetize" &&
+		pokeInfo.find(".ability").val() !== "Unidentified Flying Object" &&
         pokeInfo.find(".item").val() !== "Air Balloon"
 	);
 }

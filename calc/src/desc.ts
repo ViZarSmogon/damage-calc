@@ -28,6 +28,9 @@ export interface RawDesc {
   isSwordOfRuin?: boolean;
   isTabletsOfRuin?: boolean;
   isVesselOfRuin?: boolean;
+  isGrindset?: boolean;
+  isSpongeOfRuin?: boolean;
+  isLawnmowerOfRuin?: boolean;
   isAuroraVeil?: boolean;
   isFlowerGiftAttacker?: boolean;
   isFlowerGiftDefender?: boolean;
@@ -190,7 +193,7 @@ export function getRecoil(
         notation, Math.min(max, defender.curHP()) * mod, attacker.maxHP(), 100
       );
     }
-    if (!attacker.hasAbility('Rock Head')) {
+    if (!attacker.hasAbility('Rock Head', 'Stone Wheel', 'Molten Core', 'Numbskull', 'Reachless')) {
       recoil = [minRecoilDamage, maxRecoilDamage];
       text = `${minRecoilDamage} - ${maxRecoilDamage}${notation} recoil damage`;
     }
@@ -280,7 +283,7 @@ export function getKOChance(
   const hazards = getHazards(gen, defender, field.defenderSide);
   const eot = getEndOfTurn(gen, attacker, defender, move, field);
   const toxicCounter =
-     defender.hasStatus('tox') && !defender.hasAbility('Magic Guard') ? defender.toxicCounter : 0;
+     defender.hasStatus('tox') && !defender.hasAbility('Magic Guard', 'Overwhelming') ? defender.toxicCounter : 0;
 
   // multi-hit moves have too many possibilities for brute-forcing to work, so reduce it
   // to an approximate distribution
@@ -424,7 +427,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
   if (defender.hasItem('Heavy-Duty Boots')) {
     return {damage, texts};
   }
-  if (defenderSide.isSR && !defender.hasAbility('Magic Guard', 'Mountaineer')) {
+  if (defenderSide.isSR && !defender.hasAbility('Magic Guard', 'Mountaineer', 'Overwhelming')) {
     const rockType = gen.types.get('rock' as ID)!;
     const effectiveness =
       rockType.effectiveness[defender.types[0]]! *
@@ -432,7 +435,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
     damage += Math.floor((effectiveness * defender.maxHP()) / 8);
     texts.push('Stealth Rock');
   }
-  if (defenderSide.steelsurge && !defender.hasAbility('Magic Guard', 'Mountaineer')) {
+  if (defenderSide.steelsurge && !defender.hasAbility('Magic Guard', 'Mountaineer', 'Overwhelming')) {
     const steelType = gen.types.get('steel' as ID)!;
     const effectiveness =
       steelType.effectiveness[defender.types[0]]! *
@@ -442,7 +445,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
   }
 
   if (!defender.hasType('Flying') &&
-      !defender.hasAbility('Magic Guard', 'Levitate') &&
+      !defender.hasAbility('Magic Guard', 'Levitate', 'Holy Grail', 'Rising Tension', 'Free Flight', 'Airborne Armor', 'Overwhelming', 'Hellkite', 'Air Control', 'Magnetize', 'Unidentified Flying Object') &&
       !defender.hasItem('Air Balloon')
   ) {
     if (defenderSide.spikes === 1) {
@@ -494,7 +497,7 @@ function getEndOfTurn(
   } else if (field.hasWeather('Sand')) {
     if (
       !defender.hasType('Rock', 'Ground', 'Steel') &&
-      !defender.hasAbility('Magic Guard', 'Overcoat', 'Sand Force', 'Sand Rush', 'Sand Veil') &&
+      !defender.hasAbility('Magic Guard', 'Overcoat', 'Sand Force', 'Sand Rush', 'Sand Veil', 'Overwhelming', 'Rogue') &&
       !defender.hasItem('Safety Goggles')
     ) {
       damage -= Math.floor(defender.maxHP() / (gen.num === 2 ? 8 : 16));
@@ -504,15 +507,26 @@ function getEndOfTurn(
     if (defender.hasAbility('Ice Body')) {
       damage += Math.floor(defender.maxHP() / 16);
       texts.push('Ice Body recovery');
+    } else if (defender.hasAbility('Winter Storm')) {
+      damage += Math.floor(defender.maxHP() / 16);
+      texts.push('Winter Storm recovery');
     } else if (
       !defender.hasType('Ice') &&
-      !defender.hasAbility('Magic Guard', 'Overcoat', 'Snow Cloak') &&
+      !defender.hasAbility('Magic Guard', 'Overcoat', 'Snow Cloak', 'Overwhelming', 'Rogue') &&
       !defender.hasItem('Safety Goggles') &&
       field.hasWeather('Hail')
     ) {
       damage -= Math.floor(defender.maxHP() / 16);
       texts.push('hail damage');
     }
+	else if (
+      !defender.hasType('Ice') &&
+      !defender.hasAbility('Magic Guard', 'Overcoat', 'Snow Cloak', 'Overwhelming', 'Rogue') &&
+      attacker.hasAbility('Winter Storm')
+  	) {
+      damage -= Math.floor(defender.maxHP() / 8);
+      texts.push('Winter Storm');
+ 	 }
   }
 
   const loseItem = move.named('Knock Off') && !defender.hasAbility('Sticky Hold');
@@ -523,7 +537,7 @@ function getEndOfTurn(
     if (defender.hasType('Poison')) {
       damage += Math.floor(defender.maxHP() / 16);
       texts.push('Black Sludge recovery');
-    } else if (!defender.hasAbility('Magic Guard', 'Klutz')) {
+    } else if (!defender.hasAbility('Magic Guard', 'Klutz', 'Overwhelming')) {
       damage -= Math.floor(defender.maxHP() / 8);
       texts.push('Black Sludge damage');
     }
@@ -533,14 +547,14 @@ function getEndOfTurn(
   }
 
   if (field.defenderSide.isSeeded) {
-    if (!defender.hasAbility('Magic Guard')) {
+    if (!defender.hasAbility('Magic Guard', 'Overwhelming')) {
       // 1/16 in gen 1, 1/8 in gen 2 onwards
       damage -= Math.floor(defender.maxHP() / (gen.num >= 2 ? 8 : 16));
       texts.push('Leech Seed damage');
     }
   }
 
-  if (field.attackerSide.isSeeded && !attacker.hasAbility('Magic Guard')) {
+  if (field.attackerSide.isSeeded && !attacker.hasAbility('Magic Guard', 'Overwhelming')) {
     let recovery = Math.floor(attacker.maxHP() / (gen.num >= 2 ? 8 : 16));
     if (defender.hasItem('Big Root')) recovery = Math.trunc(recovery * 5324 / 4096);
     if (attacker.hasAbility('Liquid Ooze')) {
@@ -563,7 +577,7 @@ function getEndOfTurn(
     if (defender.hasAbility('Poison Heal')) {
       damage += Math.floor(defender.maxHP() / 8);
       texts.push('Poison Heal');
-    } else if (!defender.hasAbility('Magic Guard')) {
+    } else if (!defender.hasAbility('Magic Guard', 'Overwhelming')) {
       damage -= Math.floor(defender.maxHP() / (gen.num === 1 ? 16 : 8));
       texts.push('poison damage');
     }
@@ -571,27 +585,27 @@ function getEndOfTurn(
     if (defender.hasAbility('Poison Heal')) {
       damage += Math.floor(defender.maxHP() / 8);
       texts.push('Poison Heal');
-    } else if (!defender.hasAbility('Magic Guard')) {
+    } else if (!defender.hasAbility('Magic Guard', 'Overwhelming')) {
       texts.push('toxic damage');
     }
   } else if (defender.hasStatus('brn')) {
-    if (defender.hasAbility('Heatproof')) {
+    if (defender.hasAbility('Heatproof', 'Heatproof Drive')) {
       damage -= Math.floor(defender.maxHP() / (gen.num > 6 ? 32 : 16));
       texts.push('reduced burn damage');
-    } else if (!defender.hasAbility('Magic Guard')) {
+    } else if (!defender.hasAbility('Magic Guard', 'Overwhelming')) {
       damage -= Math.floor(defender.maxHP() / (gen.num === 1 || gen.num > 6 ? 16 : 8));
       texts.push('burn damage');
     }
   } else if (
     (defender.hasStatus('slp') || defender.hasAbility('Comatose')) &&
     attacker.hasAbility('isBadDreams') &&
-    !defender.hasAbility('Magic Guard')
+    !defender.hasAbility('Magic Guard', 'Overwhelming')
   ) {
     damage -= Math.floor(defender.maxHP() / 8);
     texts.push('Bad Dreams');
   }
 
-  if (!defender.hasAbility('Magic Guard') && TRAPPING.includes(move.name)) {
+  if (!defender.hasAbility('Magic Guard', 'Overwhelming') && TRAPPING.includes(move.name)) {
     if (attacker.hasItem('Binding Band')) {
       damage -= gen.num > 5 ? Math.floor(defender.maxHP() / 6) : Math.floor(defender.maxHP() / 8);
       texts.push('trapping damage');
@@ -600,37 +614,37 @@ function getEndOfTurn(
       texts.push('trapping damage');
     }
   }
-  if (defender.isSaltCure && !defender.hasAbility('Magic Guard')) {
+  if (defender.isSaltCure && !defender.hasAbility('Magic Guard', 'Overwhelming')) {
     const isWaterOrSteel = defender.hasType('Water', 'Steel') ||
       (defender.teraType && ['Water', 'Steel'].includes(defender.teraType));
     damage -= Math.floor(defender.maxHP() / (isWaterOrSteel ? 4 : 8));
     texts.push('Salt Cure');
   }
-  if (!defender.hasType('Fire') && !defender.hasAbility('Magic Guard') &&
+  if (!defender.hasType('Fire') && !defender.hasAbility('Magic Guard', 'Overwhelming') &&
       (move.named('Fire Pledge (Grass Pledge Boosted)', 'Grass Pledge (Fire Pledge Boosted)'))) {
     damage -= Math.floor(defender.maxHP() / 8);
     texts.push('Sea of Fire damage');
   }
 
-  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Grass') &&
+  if (!defender.hasAbility('Magic Guard', 'Overwhelming') && !defender.hasType('Grass') &&
       (field.defenderSide.vinelash || move.named('G-Max Vine Lash'))) {
     damage -= Math.floor(defender.maxHP() / 6);
     texts.push('Vine Lash damage');
   }
 
-  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Fire') &&
+  if (!defender.hasAbility('Magic Guard', 'Overwhelming') && !defender.hasType('Fire') &&
       (field.defenderSide.wildfire || move.named('G-Max Wildfire'))) {
     damage -= Math.floor(defender.maxHP() / 6);
     texts.push('Wildfire damage');
   }
 
-  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Water') &&
+  if (!defender.hasAbility('Magic Guard', 'Overwhelming') && !defender.hasType('Water') &&
       (field.defenderSide.cannonade || move.named('G-Max Cannonade'))) {
     damage -= Math.floor(defender.maxHP() / 6);
     texts.push('Cannonade damage');
   }
 
-  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Rock') &&
+  if (!defender.hasAbility('Magic Guard', 'Overwhelming') && !defender.hasType('Rock') &&
       (field.defenderSide.volcalith || move.named('G-Max Volcalith'))) {
     damage -= Math.floor(defender.maxHP() / 6);
     texts.push('Volcalith damage');
@@ -856,6 +870,9 @@ function buildDescription(description: RawDesc, attacker: Pokemon, defender: Pok
   if (description.isSwordOfRuin) {
     output += 'Sword of Ruin ';
   }
+  if (description.isSpongeOfRuin) {
+    output += 'Sponge of Ruin ';
+  }
   output += description.attackerName + ' ';
   if (description.isHelpingHand) {
     output += 'Helping Hand ';
@@ -903,6 +920,12 @@ function buildDescription(description: RawDesc, attacker: Pokemon, defender: Pok
   }
   if (description.isVesselOfRuin) {
     output += 'Vessel of Ruin ';
+  }
+  if (description.isGrindset) {
+    output += 'Grindset ';
+  }
+   if (description.isLawnmowerOfRuin) {
+    output += 'Lawnmower of Ruin ';
   }
   if (description.isProtected) {
     output += 'protected ';
