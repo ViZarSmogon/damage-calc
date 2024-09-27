@@ -89,7 +89,7 @@ const RBY: {[name: string]: SpeciesData} = {
   },
   Charizard: {
     types: ['Fire', 'Flying'],
-    bs: {hp: 78, at: 84, df: 78, sp: 100, sl: 85},
+    bs: {hp: 78, at: 99, df: 85, sp: 113, sl: 85},
     weightkg: 90.5,
   },
   Charmander: {
@@ -225,7 +225,7 @@ const RBY: {[name: string]: SpeciesData} = {
   },
   Gengar: {
     types: ['Ghost', 'Poison'],
-    bs: {hp: 60, at: 65, df: 60, sp: 110, sl: 130},
+    bs: {hp: 60, at: 65, df: 70, sp: 120, sl: 130},
     weightkg: 40.5,
   },
   Geodude: {
@@ -839,7 +839,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   Fearow: {bs: {sa: 61, sd: 61}},
   Flareon: {bs: {sa: 95, sd: 110}},
   Gastly: {bs: {sa: 100, sd: 35}},
-  Gengar: {bs: {sa: 130, sd: 75}},
+  Gengar: {bs: {sa: 135, sd: 85}},
   Geodude: {bs: {sa: 30, sd: 30}},
   Gloom: {bs: {sa: 85, sd: 75}},
   Golbat: {bs: {sa: 65, sd: 75}, nfe: true},
@@ -6198,7 +6198,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   Electrode: {bs: {sp: 150}},
   Exeggutor: {bs: {sd: 75}, otherFormes: ['Exeggutor-Alola']},
   'Farfetch\u2019d': {bs: {at: 90}},
-  Gengar: {abilities: {0: 'Cursed Body'}},
+  Gengar: {abilities: {0: 'Levitate'}},
   Geodude: {otherFormes: ['Geodude-Alola']},
   Golem: {otherFormes: ['Golem-Alola']},
   Graveler: {otherFormes: ['Graveler-Alola']},
@@ -7701,9 +7701,9 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   'Charizard-Gmax': {
     types: ['Fire', 'Flying'],
-    bs: {hp: 78, at: 84, df: 78, sa: 109, sd: 85, sp: 100},
+    bs: {hp: 78, at: 99, df: 85, sa: 109, sd: 85, sp: 113},
     weightkg: 0,
-    abilities: {0: 'Mold Breaker'},
+    abilities: {0: 'Battle Bond'},
     baseSpecies: 'Charizard',
   },
   Chewtle: {
@@ -7924,16 +7924,16 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Duraludon: {
     types: ['Steel', 'Dragon'],
-    bs: {hp: 70, at: 95, df: 115, sa: 120, sd: 50, sp: 85},
+    bs: {hp: 70, at: 95, df: 115, sa: 110, sd: 60, sp: 85},
     weightkg: 40,
-    abilities: {0: 'Light Metal'},
+    abilities: {0: 'Bulletproof'},
     otherFormes: ['Duraludon-Gmax'],
   },
   'Duraludon-Gmax': {
     types: ['Steel', 'Dragon'],
-    bs: {hp: 70, at: 95, df: 115, sa: 120, sd: 50, sp: 85},
+    bs: {hp: 70, at: 95, df: 115, sa: 110, sd: 60, sp: 85},
     weightkg: 0,
-    abilities: {0: 'Pressure'},
+    abilities: {0: 'Unaware'},
     baseSpecies: 'Duraludon',
   },
   'Eevee-Gmax': {
@@ -8023,9 +8023,9 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   'Gengar-Gmax': {
     types: ['Ghost', 'Poison'],
-    bs: {hp: 60, at: 65, df: 60, sa: 130, sd: 75, sp: 110},
+    bs: {hp: 60, at: 65, df: 70, sa: 135, sd: 85, sp: 120},
     weightkg: 0,
-    abilities: {0: 'Mummy'},
+    abilities: {0: 'Corrosion'},
     baseSpecies: 'Gengar',
   },
   Glastrier: {
@@ -8126,16 +8126,16 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Inteleon: {
     types: ['Water'],
-    bs: {hp: 70, at: 85, df: 65, sa: 125, sd: 65, sp: 120},
+    bs: {hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 110},
     weightkg: 45.2,
     abilities: {0: 'Torrent'},
     otherFormes: ['Inteleon-Gmax'],
   },
   'Inteleon-Gmax': {
     types: ['Water'],
-    bs: {hp: 70, at: 85, df: 65, sa: 125, sd: 65, sp: 120},
+    bs: {hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 110},
     weightkg: 0,
-    abilities: {0: 'Storm Drain'},
+    abilities: {0: 'Stakeout'},
     baseSpecies: 'Inteleon',
   },
   'Kingler-Gmax': {
@@ -8579,28 +8579,28 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Toxtricity: {
     types: ['Electric', 'Poison'],
-    bs: {hp: 75, at: 98, df: 70, sa: 114, sd: 70, sp: 75},
+    bs: {hp: 75, at: 118, df: 70, sa: 118, sd: 70, sp: 86},
     weightkg: 40,
     abilities: {0: 'Punk Rock'},
     otherFormes: ['Toxtricity-Gmax', 'Toxtricity-Low-Key', 'Toxtricity-Low-Key-Gmax'],
   },
   'Toxtricity-Gmax': {
     types: ['Electric', 'Poison'],
-    bs: {hp: 75, at: 98, df: 70, sa: 114, sd: 70, sp: 75},
+    bs: {hp: 75, at: 118, df: 70, sa: 118, sd: 70, sp: 86},
     weightkg: 0,
-    abilities: {0: 'Electromorphosis'},
+    abilities: {0: 'Merciless'},
     baseSpecies: 'Toxtricity',
   },
   'Toxtricity-Low-Key': {
     types: ['Electric', 'Poison'],
-    bs: {hp: 75, at: 98, df: 70, sa: 114, sd: 70, sp: 75},
+    bs: {hp: 75, at: 78, df: 90, sa: 129, sd: 90, sp: 75},
     weightkg: 40,
     abilities: {0: 'Punk Rock'},
     baseSpecies: 'Toxtricity',
   },
   'Toxtricity-Low-Key-Gmax': {
     types: ['Electric', 'Poison'],
-    bs: {hp: 75, at: 98, df: 70, sa: 114, sd: 70, sp: 75},
+    bs: {hp: 75, at: 78, df: 90, sa: 129, sd: 90, sp: 75},
     weightkg: 0,
     abilities: {0: 'Electromorphosis'},
     baseSpecies: 'Toxtricity',

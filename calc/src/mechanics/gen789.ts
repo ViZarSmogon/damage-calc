@@ -118,8 +118,8 @@ export function calculateSMSSSV(
   }
   if (defender.teraType !== 'Stellar') desc.defenderTera = defender.teraType;
 
-  if (move.named('Photon Geyser', 'Light That Burns the Sky') ||
-      (move.named('Tera Blast') && attacker.teraType)) {
+  if (move.named('Photon Geyser', 'Light That Burns the Sky', 'Overdrive', 'G-Max Wildfire') ||
+      (move.named('Tera Blast') && attacker.teraType) || (move.named('G-Max Stun Shock') && attacker.named('Toxtricity-Gmax'))) {
     move.category = attacker.stats.atk > attacker.stats.spa ? 'Physical' : 'Special';
   }
 
@@ -161,7 +161,7 @@ export function calculateSMSSSV(
   const moveIgnoresAbility = move.named(
     'G-Max Drum Solo',
     //'G-Max Fire Ball',
-    'G-Max Hydrosnipe',
+    //'G-Max Hydrosnipe',
     'Light That Burns the Sky',
     'Menacing Moonraze Maelstrom',
     'Moongeist Beam',

@@ -3083,7 +3083,7 @@ const SS_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 1,
   },
   'G-Max Depletion': {
-    bp: 140,
+    bp: 110,
     type: 'Dragon',
     category: 'Physical',
     isMax: true,
@@ -3133,10 +3133,11 @@ const SS_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     maxPower: 1,
   },
   'G-Max Hydrosnipe': {
-    bp: 150,
+    bp: 80,
     type: 'Water',
     category: 'Physical',
     isMax: true,
+	priority: 1,
     maxPower: 1,
   },
   'G-Max Malodor': {
@@ -3473,7 +3474,7 @@ const SS_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   Obstruct: {bp: 0, type: 'Dark', priority: 4},
   Octolock: {bp: 0, type: 'Fighting'},
   Overdrive: {
-    bp: 80,
+    bp: 85,
     type: 'Electric',
     isSound: true,
     target: 'allAdjacentFoes',
