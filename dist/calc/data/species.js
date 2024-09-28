@@ -8148,14 +8148,14 @@ var SS_PATCH = {
     },
     Inteleon: {
         types: ['Water'],
-        bs: { hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 120 },
+        bs: { hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 110 },
         weightkg: 45.2,
         abilities: { 0: 'Torrent' },
         otherFormes: ['Inteleon-Gmax']
     },
     'Inteleon-Gmax': {
         types: ['Water'],
-        bs: { hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 120 },
+        bs: { hp: 70, at: 90, df: 85, sa: 125, sd: 65, sp: 110 },
         weightkg: 0,
         abilities: { 0: 'Stakeout' },
         baseSpecies: 'Inteleon'
