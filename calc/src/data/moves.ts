@@ -983,7 +983,15 @@ const DPP_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     makesContact: true,
     category: 'Physical',
   },
-  'Dark Void': {bp: 0, type: 'Dark', target: 'allAdjacentFoes'},
+  'Dark Void': {
+    bp: 80,
+    type: 'Dark',
+    category: 'Special',
+    target: 'allAdjacentFoes',
+    zp: 160,
+    maxPower: 130,
+    drain: [1, 2],
+  },
   'Gastro Acid': {bp: 0, type: 'Poison'},
   Captivate: {bp: 0, type: 'Normal', target: 'allAdjacentFoes'},
   'Grass Knot': {
@@ -4184,7 +4192,15 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   Tailwind: {isWind: true},
   Twister: {isWind: true},
   Whirlwind: {isWind: true},
-  'Wicked Blow': {bp: 75, zp: 140},
+  'Wicked Blow': {
+    bp: 120,
+    type: 'Dark',
+    category: 'Physical',
+    makesContact: true,
+    isPunch: true,
+    zp: 190,
+    maxPower: 140,
+  },
   'X-Scissor': {isSlicing: true},
   'Aqua Cutter': {
     bp: 70,
@@ -4486,7 +4502,7 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     // Sheer Force boost implemented in gen789.ts
   },
   'Kowtow Cleave': {
-    bp: 85,
+    bp: 80,
     type: 'Dark',
     category: 'Physical',
     zp: 160,

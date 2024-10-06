@@ -3036,7 +3036,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Darkrai: {
     types: ['Dark'],
-    bs: {hp: 70, at: 90, df: 90, sa: 135, sd: 90, sp: 125},
+    bs: {hp: 90, at: 90, df: 90, sa: 120, sd: 90, sp: 120},
     weightkg: 50.5,
     abilities: {0: 'Bad Dreams'},
     gender: 'N',
@@ -8607,7 +8607,7 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Urshifu: {
     types: ['Fighting', 'Dark'],
-    bs: {hp: 100, at: 130, df: 100, sa: 63, sd: 60, sp: 97},
+    bs: {hp: 100, at: 120, df: 100, sa: 73, sd: 60, sp: 97},
     weightkg: 105,
     abilities: {0: 'Unseen Fist'},
     otherFormes: ['Urshifu-Gmax', 'Urshifu-Rapid-Strike', 'Urshifu-Rapid-Strike-Gmax'],
@@ -8628,7 +8628,7 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   'Urshifu-Gmax': {
     types: ['Fighting', 'Dark'],
-    bs: {hp: 100, at: 130, df: 100, sa: 63, sd: 60, sp: 97},
+    bs: {hp: 100, at: 120, df: 100, sa: 73, sd: 60, sp: 97},
     weightkg: 0,
     abilities: {0: 'Unseen Fist'},
     baseSpecies: 'Urshifu',
@@ -9106,14 +9106,14 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   'Chi-Yu': {
     types: ['Dark', 'Fire'],
-    bs: {hp: 55, at: 80, df: 80, sa: 135, sd: 120, sp: 100},
+    bs: {hp: 85, at: 90, df: 90, sa: 95, sd: 130, sp: 80},
     weightkg: 4.9,
     gender: 'N',
     abilities: {0: 'Beads of Ruin'},
   },
   'Chien-Pao': {
     types: ['Dark', 'Ice'],
-    bs: {hp: 80, at: 120, df: 80, sa: 90, sd: 65, sp: 135},
+    bs: {hp: 80, at: 100, df: 80, sa: 90, sd: 85, sp: 135},
     weightkg: 152.2,
     gender: 'N',
     abilities: {0: 'Sword of Ruin'},
@@ -9429,7 +9429,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Kingambit: {
     types: ['Dark', 'Steel'],
-    bs: {hp: 100, at: 135, df: 120, sa: 60, sd: 85, sp: 50},
+    bs: {hp: 100, at: 125, df: 130, sa: 60, sd: 85, sp: 50},
     weightkg: 120,
     abilities: {0: 'Defiant'},
   },
@@ -9550,7 +9550,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   'Ogerpon-Hearthflame': {
     types: ['Grass', 'Fire'],
     bs: {hp: 80, at: 120, df: 84, sa: 60, sd: 96, sp: 110},
-    abilities: {0: 'Mold Breaker'},
+    abilities: {0: 'Regenerator'},
     weightkg: 39.8,
     baseSpecies: 'Ogerpon',
   },

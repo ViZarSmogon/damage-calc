@@ -1041,6 +1041,11 @@ export function calculateBPModsSMSSSV(
   ) {
     bpMods.push(6144);
     desc.moveBP = basePower * 1.5;
+  } else if (move.named('Kowtow Cleave')) {
+     if (attacker.boosts['atk'] < 0 || attacker.boosts['def'] < 0 || attacker.boosts['spa'] < 0 || attacker.boosts['spd'] < 0 || attacker.boosts['spe'] < 0) {
+       bpMods.push(5325);
+       desc.moveBP = basePower * 1.3;
+    }
   } else if (move.named('Solar Beam', 'Solar Blade') &&
       field.hasWeather('Rain', 'Heavy Rain', 'Sand', 'Hail', 'Snow')) {
     bpMods.push(2048);
@@ -1272,7 +1277,7 @@ export function calculateAttackSMSSSV(
       : getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
   const attackSource = move.named('Foul Play') ? defender : attacker;
   if (attackSource.boosts[attackStat] === 0 ||
-      (isCritical && attackSource.boosts[attackStat] < 0)) {
+      (isCritical && attackSource.boosts[attackStat] < 0) || attacker.hasAbility('Supreme Overlord')) {
     attack = attackSource.rawStats[attackStat];
   } else if (defender.hasAbility('Unaware')) {
     attack = attackSource.rawStats[attackStat];
@@ -1456,7 +1461,7 @@ export function calculateDefenseSMSSSV(
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
   if (defender.boosts[defenseStat] === 0 ||
       (isCritical && defender.boosts[defenseStat] > 0) ||
-      move.ignoreDefensive) {
+      move.ignoreDefensive || attacker.hasAbility('Supreme Overlord')) {
     defense = defender.rawStats[defenseStat];
   } else if (attacker.hasAbility('Unaware')) {
     defense = defender.rawStats[defenseStat];

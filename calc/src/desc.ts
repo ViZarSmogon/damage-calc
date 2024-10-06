@@ -142,6 +142,7 @@ export function getRecovery(
       for (const j in recovery) {
         let drained = Math.round(range[j] * percentHealed);
         if (attacker.hasItem('Big Root')) drained = Math.trunc(drained * 5324 / 4096);
+		if ((attacker.hasAbility('Bad Dreams') || defender.hasAbility('Bad Dreams')) && !attacker.hasType('Dark')) drained = Math.trunc(drained * 2048 / 4096);
         recovery[j] += Math.min(drained * move.hits, max);
       }
     }
@@ -582,13 +583,6 @@ function getEndOfTurn(
       damage -= Math.floor(defender.maxHP() / (gen.num === 1 || gen.num > 6 ? 16 : 8));
       texts.push('burn damage');
     }
-  } else if (
-    (defender.hasStatus('slp') || defender.hasAbility('Comatose')) &&
-    attacker.hasAbility('isBadDreams') &&
-    !defender.hasAbility('Magic Guard')
-  ) {
-    damage -= Math.floor(defender.maxHP() / 8);
-    texts.push('Bad Dreams');
   }
 
   if (!defender.hasAbility('Magic Guard') && TRAPPING.includes(move.name)) {
