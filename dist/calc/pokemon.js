@@ -43,7 +43,7 @@ var Pokemon = (function () {
         this.abilityOn = !!options.abilityOn;
         this.isDynamaxed = !!options.isDynamaxed;
         this.dynamaxLevel = this.isDynamaxed
-            ? (options.dynamaxLevel === undefined ? 5 : 10) : undefined;
+            ? (options.dynamaxLevel === undefined ? 10 : options.dynamaxLevel) : undefined;
         this.isSaltCure = !!options.isSaltCure;
         this.alliesFainted = options.alliesFainted;
         this.boostedStat = options.boostedStat;
@@ -90,16 +90,14 @@ var Pokemon = (function () {
     Pokemon.prototype.maxHP = function (original) {
         if (original === void 0) { original = false; }
         if (!original && this.isDynamaxed && this.species.baseStats.hp !== 1) {
-            var multiplier = this.name.includes('Gmax') ? 5 : this.dynamaxLevel;
-            return Math.floor((this.rawStats.hp * (150 + 5 * multiplier)) / 100);
+            return Math.floor(this.rawStats.hp * (150 / 100));
         }
         return this.rawStats.hp;
     };
     Pokemon.prototype.curHP = function (original) {
         if (original === void 0) { original = false; }
         if (!original && this.isDynamaxed && this.species.baseStats.hp !== 1) {
-            var multiplier = this.name.includes('Gmax') ? 5 : this.dynamaxLevel;
-            return Math.ceil((this.originalCurHP * (150 + 5 * multiplier)) / 100);
+            return Math.ceil(this.originalCurHP * (150 / 100));
         }
         return this.originalCurHP;
     };
