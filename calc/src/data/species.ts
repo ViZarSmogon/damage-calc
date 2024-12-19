@@ -9032,7 +9032,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     types: ['Fire', 'Psychic'],
     bs: {hp: 85, at: 60, df: 100, sa: 125, sd: 80, sp: 75},
     weightkg: 85,
-    abilities: {0: 'Flash Fire'},
+    abilities: {0: 'Mega Launcher'},
   },
   Baxcalibur: {
     types: ['Dragon', 'Ice'],
@@ -9083,7 +9083,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     types: ['Fire', 'Ghost'],
     bs: {hp: 75, at: 125, df: 80, sa: 60, sd: 100, sp: 85},
     weightkg: 62,
-    abilities: {0: 'Flash Fire'},
+    abilities: {0: 'Sharpness'},
   },
   Cetitan: {
     types: ['Ice'],
@@ -9275,6 +9275,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     weightkg: 30,
     gender: 'N',
     abilities: {0: 'Good as Gold'},
+    otherFormes: ['Gholdengo-Eason'],
   },
   Gimmighoul: {
     types: ['Ghost'],
@@ -9442,7 +9443,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Koraidon: {
     types: ['Fighting', 'Dragon'],
-    bs: {hp: 100, at: 135, df: 115, sa: 85, sd: 100, sp: 135},
+    bs: {hp: 100, at: 130, df: 115, sa: 85, sd: 100, sp: 130},
     weightkg: 303,
     gender: 'N',
     abilities: {0: 'Orichalcum Pulse'},
@@ -9497,7 +9498,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   Miraidon: {
     types: ['Electric', 'Dragon'],
-    bs: {hp: 100, at: 85, df: 100, sa: 135, sd: 115, sp: 135},
+    bs: {hp: 100, at: 85, df: 100, sa: 130, sd: 115, sp: 130},
     weightkg: 240,
     gender: 'N',
     abilities: {0: 'Hadron Engine'},
@@ -9625,7 +9626,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   },
   'Palafin-Hero': {
     types: ['Water'],
-    bs: {hp: 100, at: 160, df: 97, sa: 106, sd: 87, sp: 100},
+    bs: {hp: 100, at: 130, df: 97, sa: 93, sd: 87, sp: 100},
     weightkg: 97.4,
     abilities: {0: 'Zero to Hero'},
     baseSpecies: 'Palafin',
@@ -9700,7 +9701,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     types: ['Bug', 'Psychic'],
     bs: {hp: 75, at: 50, df: 85, sa: 115, sd: 100, sp: 45},
     weightkg: 3.5,
-    abilities: {0: 'Synchronize'},
+    abilities: {0: 'Psychic Surge'},
   },
   'Raging Bolt': {
     types: ['Electric', 'Dragon'],
@@ -9713,7 +9714,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     types: ['Bug'],
     bs: {hp: 41, at: 50, df: 60, sa: 31, sd: 58, sp: 30},
     weightkg: 1,
-    abilities: {0: 'Compound Eyes'},
+    abilities: {0: 'Earth Eater'},
     nfe: true,
   },
   Revavroom: {
@@ -10018,6 +10019,32 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     weightkg: 5.4,
     abilities: {0: 'Gooey'},
   },
+  
+  
+  //Eason Patch
+  Ampharos: {abilities: {0: 'Electric Surge'}},
+  Cacturne: {nfe: true},
+  Excadrill: {otherFormes: ['Excadrill-Eason']},
+  Flaaffy: {abilities: {0: 'Fluffy'}},
+  Granbull: {nfe: true},
+  Mareep: {abilities: {0: 'Fluffy'}},
+  
+  'Excadrill-Eason': {
+    types: ['Ground', 'Fairy'],
+    bs: {hp: 100, at: 115, df: 60, sa: 50, sd: 90, sp: 93},
+    weightkg: 21.3,
+    abilities: {0: 'Pixilate'},
+    baseSpecies: 'Excadrill',
+  },
+  'Gholdengo-Eason': {
+    types: ['Ghost', 'Water'],
+    bs: {hp: 97, at: 60, df: 95, sa: 113, sd: 91, sp: 94},
+    weightkg: 41,
+    gender: 'N',
+    abilities: {0: 'Surge Surfer'},
+    baseSpecies: 'Gholdengo',
+  },
+
 };
 
 const SV: {[name: string]: SpeciesData} = extend(true, {}, SS, SV_PATCH, PLA_PATCH);

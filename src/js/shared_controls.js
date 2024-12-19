@@ -406,10 +406,12 @@ function autosetTerrain(ability, i) {
 		$("#electric").prop("checked", true);
 		break;
 	case "Grassy Surge":
+	case "Grass Pelt":
 		lastAutoTerrain[i] = "Grassy";
 		$("#grassy").prop("checked", true);
 		break;
 	case "Misty Surge":
+	case "Mist Rush":
 		lastAutoTerrain[i] = "Misty";
 		$("#misty").prop("checked", true);
 		break;

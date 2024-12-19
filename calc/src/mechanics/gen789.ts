@@ -129,7 +129,11 @@ export function calculateSMSSSV(
     return result;
   }
 
-  if (move.flags.punch && attacker.hasItem('Punching Glove')) {
+  if ((attacker.hasItem('Punching Glove') && move.flags.punch) ||
+    (attacker.hasItem('Razor Fang') && move.flags.bite) ||
+    (attacker.hasItem('Razor Claw') && move.flags.slicing) ||
+    (attacker.hasItem('Quick Claw') && move.priority > 1)
+  ) {
     desc.attackerItem = attacker.item;
     move.flags.contact = 0;
   }
@@ -140,7 +144,7 @@ export function calculateSMSSSV(
   }
 
   const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed ||
-  (attacker.hasAbility('Unseen Fist') && move.flags.contact);
+  (attacker.hasAbility('Unseen Fist') && move.flags.punch);
 
   if (field.defenderSide.isProtected && !breaksProtect) {
     desc.isProtected = true;
@@ -426,6 +430,16 @@ export function calculateSMSSSV(
   if (typeEffectiveness === 0 && move.named('Thousand Arrows')) {
     typeEffectiveness = 1;
   }
+  
+  if (attacker.hasAbility('Corrosion') &&
+    move.hasType('Poison') && defender.hasType('Steel')) {
+    typeEffectiveness = 2;
+  }
+  if (defender.hasAbility('Exoskeleton') &&
+    move.hasType('Dark', 'Fairy', 'Fighting', 'Grass', 'Ground')) {
+    typeEffectiveness /= 2;
+    desc.defenderAbility = defender.ability;
+  }
 
   if (typeEffectiveness === 0) {
     return result;
@@ -477,7 +491,7 @@ export function calculateSMSSSV(
   if ((defender.hasAbility('Wonder Guard') && typeEffectiveness <= 1) ||
       (move.hasType('Grass') && defender.hasAbility('Sap Sipper')) ||
       (move.hasType('Fire') && defender.hasAbility('Flash Fire', 'Well-Baked Body')) ||
-      (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Storm Drain', 'Water Absorb')) ||
+      (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Storm Drain', 'Water Absorb', 'Water Compaction')) ||
       (move.hasType('Electric') &&
         defender.hasAbility('Lightning Rod', 'Motor Drive', 'Volt Absorb')) ||
       (move.hasType('Ground') &&
@@ -648,7 +662,7 @@ export function calculateSMSSSV(
 
   let protect = false;
   if (field.defenderSide.isProtected &&
-    (attacker.isDynamaxed || (move.isZ && attacker.item && attacker.item.includes(' Z')))) {
+    (attacker.isDynamaxed || (move.isZ && attacker.item && attacker.item.includes(' Z')) || (attacker.hasAbility('Unseen Fist') && move.flags.punch))) {
     protect = true;
     desc.isProtected = true;
   }
@@ -792,7 +806,7 @@ export function calculateBasePowerSMSSSV(
     break;
   case 'Bolt Beak':
   case 'Fishious Rend':
-    basePower = move.bp * (turnOrder !== 'last' ? 2 : 1);
+    basePower = move.bp * (turnOrder !== 'last' ? 1.3 : 1);
     desc.moveBP = basePower;
     break;
   case 'Pursuit':
@@ -843,6 +857,10 @@ export function calculateBasePowerSMSSSV(
   case 'Stored Power':
   case 'Power Trip':
     basePower = 20 + 20 * countBoosts(gen, attacker.boosts);
+    desc.moveBP = basePower;
+    break;
+  case 'Sharp Edge':
+    basePower = 45 + 15 * attacker.boosts['atk'];
     desc.moveBP = basePower;
     break;
   case 'Acrobatics':
@@ -1149,10 +1167,8 @@ export function calculateBPModsSMSSSV(
       attacker.hasStatus('brn') && move.category === 'Special') ||
     (attacker.hasAbility('Toxic Boost') &&
       attacker.hasStatus('psn', 'tox') && move.category === 'Physical') ||
-    (attacker.hasAbility('Mega Launcher') && move.flags.pulse) ||
     (attacker.hasAbility('Strong Jaw') && move.flags.bite) ||
-    (attacker.hasAbility('Steely Spirit') && move.hasType('Steel')) ||
-    (attacker.hasAbility('Sharpness') && move.flags.slicing)
+    (attacker.hasAbility('Steely Spirit') && move.hasType('Steel'))
   ) {
     bpMods.push(6144);
     desc.attackerAbility = attacker.ability;
@@ -1188,10 +1204,26 @@ export function calculateBPModsSMSSSV(
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
-    (attacker.hasAbility('Punk Rock') && move.flags.sound)
+    (attacker.hasAbility('Punk Rock') && move.flags.sound) || 
+    (attacker.hasAbility('Mega Launcher') && (move.flags.pulse || move.flags.bullet)) ||
+    (attacker.hasAbility('Sharpness') && move.flags.slicing)
   ) {
     bpMods.push(5325);
     desc.attackerAbility = attacker.ability;
+  }
+  if (
+    ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
+       (attacker.hasAbility('Blaze') && move.hasType('Fire')) ||
+       (attacker.hasAbility('Torrent') && move.hasType('Water')) ||
+       (attacker.hasAbility('Swarm') && move.hasType('Bug')))
+  ) {
+	if (attacker.curHP() <= attacker.maxHP() / 3) {
+		bpMods.push(6144);
+		desc.attackerAbility = attacker.ability;
+	} else {
+		bpMods.push(4505);
+		desc.attackerAbility = attacker.ability;
+	}
   }
 
   if (field.attackerSide.isBattery && move.category === 'Special') {
@@ -1237,7 +1269,7 @@ export function calculateBPModsSMSSSV(
   }
 
   if (attacker.hasAbility('Supreme Overlord') && attacker.alliesFainted) {
-    const powMod = [4096, 4506, 4915, 5325, 5734, 6144];
+    const powMod = [4096, 4300, 4505, 4710, 4915, 5120];
     bpMods.push(powMod[Math.min(5, attacker.alliesFainted)]);
     desc.attackerAbility = attacker.ability;
     desc.alliesFainted = attacker.alliesFainted;
@@ -1265,21 +1297,25 @@ export function calculateBPModsSMSSSV(
     (attacker.hasItem('Soul Dew') &&
      attacker.named('Latios', 'Latias', 'Latios-Mega', 'Latias-Mega') &&
      move.hasType('Psychic', 'Dragon')) ||
-     attacker.item && move.hasType(getItemBoostType(attacker.item)) ||
-    (attacker.name.includes('Ogerpon-Cornerstone') && attacker.hasItem('Cornerstone Mask')) ||
-    (attacker.name.includes('Ogerpon-Hearthflame') && attacker.hasItem('Hearthflame Mask')) ||
-    (attacker.name.includes('Ogerpon-Wellspring') && attacker.hasItem('Wellspring Mask'))
+     attacker.item && move.hasType(getItemBoostType(attacker.item))
   ) {
     bpMods.push(4915);
     desc.attackerItem = attacker.item;
   } else if (
     (attacker.hasItem('Muscle Band') && move.category === 'Physical') ||
-    (attacker.hasItem('Wise Glasses') && move.category === 'Special')
+    (attacker.hasItem('Wise Glasses') && move.category === 'Special') ||
+    (attacker.name.includes('Ogerpon-Cornerstone') && attacker.hasItem('Cornerstone Mask')) ||
+    (attacker.name.includes('Ogerpon-Hearthflame') && attacker.hasItem('Hearthflame Mask')) ||
+    (attacker.name.includes('Ogerpon-Wellspring') && attacker.hasItem('Wellspring Mask'))
   ) {
     bpMods.push(4505);
     desc.attackerItem = attacker.item;
-  } else if (attacker.hasItem('Punching Glove') && move.flags.punch) {
-    bpMods.push(4506);
+  } else if ((attacker.hasItem('Punching Glove') && move.flags.punch) ||
+    (attacker.hasItem('Razor Fang') && move.flags.bite) ||
+    (attacker.hasItem('Razor Claw') && move.flags.slicing) ||
+    (attacker.hasItem('Quick Claw') && move.priority > 1)
+  ) {
+    bpMods.push(4915);
   }
   return bpMods;
 }
@@ -1365,11 +1401,6 @@ export function calculateAtModsSMSSSV(
     desc.attackerAbility = attacker.ability;
   } else if (
     (attacker.hasAbility('Guts') && attacker.status && move.category === 'Physical') ||
-    (attacker.curHP() <= attacker.maxHP() / 3 &&
-      ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
-       (attacker.hasAbility('Blaze') && move.hasType('Fire')) ||
-       (attacker.hasAbility('Torrent') && move.hasType('Water')) ||
-       (attacker.hasAbility('Swarm') && move.hasType('Bug')))) ||
     (move.category === 'Special' && attacker.abilityOn && attacker.hasAbility('Plus', 'Minus'))
   ) {
     atMods.push(6144);
@@ -1422,6 +1453,10 @@ export function calculateAtModsSMSSSV(
     atMods.push(2048);
     desc.defenderAbility = defender.ability;
   }
+  if ((defender.hasAbility('Damp') && move.hasType('Electric', 'Fire'))) {
+    atMods.push(1024);
+    desc.defenderAbility = defender.ability;
+  }
 
   if (gen.num >= 9 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
     atMods.push(2048);
@@ -1441,7 +1476,7 @@ export function calculateAtModsSMSSSV(
     } else {
       desc[move.category === 'Special' ? 'isVesselOfRuin' : 'isTabletsOfRuin'] = true;
     }
-    atMods.push(3072);
+    atMods.push(3686);
   }
 
   if (isQPActive(attacker, field)) {
@@ -1460,7 +1495,11 @@ export function calculateAtModsSMSSSV(
     (attacker.hasAbility('Orichalcum Pulse') && move.category === 'Physical' &&
       field.hasWeather('Sun', 'Harsh Sunshine') && !attacker.hasItem('Utility Umbrella'))
   ) {
-    atMods.push(5461);
+    atMods.push(5325);
+    desc.attackerAbility = attacker.ability;
+  }
+  if ((attacker.hasAbility('Damp') && move.hasType('Electric', 'Fire'))) {
+    atMods.push(1024);
     desc.attackerAbility = attacker.ability;
   }
 
@@ -1520,6 +1559,10 @@ export function calculateDefenseSMSSSV(
     defense = pokeRound((defense * 3) / 2);
     desc.weather = field.weather;
   }
+  if ((defender.hasAbility('Sand Veil') && field.hasWeather('Sand')) || (defender.hasAbility('Snow Cloak') && field.hasWeather('Hail', 'Snow'))) {
+    defense = pokeRound((defense * 13) / 10);
+    desc.defenderAbility = defender.ability;
+  }
 
   const dfMods = calculateDfModsSMSSSV(
     gen,
@@ -1570,7 +1613,7 @@ export function calculateDfModsSMSSSV(
     field.hasTerrain('Grassy') &&
     hitsPhysical
   ) {
-    dfMods.push(6144);
+    dfMods.push(5325);
     desc.defenderAbility = defender.ability;
   } else if (defender.hasAbility('Fur Coat') && hitsPhysical) {
     dfMods.push(8192);
@@ -1590,7 +1633,7 @@ export function calculateDfModsSMSSSV(
     } else {
       desc[hitsPhysical ? 'isSwordOfRuin' : 'isBeadsOfRuin'] = true;
     }
-    dfMods.push(3072);
+    dfMods.push(3686);
   }
 
   if (isQPActive(defender, field)) {
@@ -1663,7 +1706,7 @@ function calculateBaseDamageSMSSSV(
   }
 
   if (isCritical) {
-    baseDamage = Math.floor(OF32(baseDamage * 1.5));
+    baseDamage = Math.floor(OF32(baseDamage * 1.3));
     desc.isCritical = isCritical;
   }
 

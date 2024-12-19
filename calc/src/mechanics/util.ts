@@ -104,10 +104,11 @@ export function getFinalSpeed(gen: Generation, pokemon: Pokemon, field: Field, s
       (pokemon.hasAbility('Sand Rush') && weather === 'Sand') ||
       (pokemon.hasAbility('Swift Swim') && weather.includes('Rain')) ||
       (pokemon.hasAbility('Slush Rush') && ['Hail', 'Snow'].includes(weather)) ||
-      (pokemon.hasAbility('Surge Surfer') && terrain === 'Electric')
+      (pokemon.hasAbility('Surge Surfer') && field.terrain)
   ) {
     speedMods.push(8192);
-  } else if (pokemon.hasAbility('Quick Feet') && pokemon.status) {
+  } else if ((pokemon.hasAbility('Quick Feet') && pokemon.status) ||
+      (pokemon.hasAbility('Mist Rush') && terrain === 'Misty')) {
     speedMods.push(6144);
   } else if (pokemon.hasAbility('Slow Start') && pokemon.abilityOn) {
     speedMods.push(2048);
@@ -125,7 +126,7 @@ export function getFinalSpeed(gen: Generation, pokemon: Pokemon, field: Field, s
 
   speed = OF32(pokeRound((speed * chainMods(speedMods, 410, 131172)) / 4096));
   if (pokemon.hasStatus('par') && !pokemon.hasAbility('Quick Feet')) {
-    speed = Math.floor(OF32(speed * (gen.num < 7 ? 25 : 50)) / 100);
+    speed = Math.floor(OF32(speed * 25) / 100);
   }
 
   speed = Math.min(gen.num <= 2 ? 999 : 10000, speed);
@@ -146,6 +147,10 @@ export function getMoveEffectiveness(
     return 1;
   } else if (move.named('Freeze-Dry') && type === 'Water') {
     return 2;
+  } else if (move.named('Gigaton Hammer') && type === 'Steel') {
+    return 2;
+  } else if (move.named('Heavy Beak') && ['Rock', 'Steel'].includes(type)) {
+    return 1;
   } else {
     let effectiveness = gen.types.get(toID(move.type))!.effectiveness[type]!;
     if (effectiveness === 0 && isRingTarget) {
@@ -597,6 +602,10 @@ export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
   }
   if (pokemon.hasAbility('Adaptability') && pokemon.hasType(move.type)) {
     stabMod += teraType && pokemon.hasOriginalType(teraType) ? 1024 : 2048;
+    desc.attackerAbility = pokemon.ability;
+  }
+  if (pokemon.hasAbility('Exoskeleton') && move.type === 'Bug') {
+    stabMod += 2048;
     desc.attackerAbility = pokemon.ability;
   }
   return stabMod;
