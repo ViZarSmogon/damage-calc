@@ -196,7 +196,7 @@ export function getRecoil(
       text = `${minRecoilDamage} - ${maxRecoilDamage}${notation} recoil damage`;
     }
   } else if (move.hasCrashDamage) {
-    const genMultiplier = gen.num === 2 ? 12.5 : gen.num >= 3 ? 50 : 1;
+    const genMultiplier = 1;
 
     let minRecoilDamage, maxRecoilDamage;
     if (damageOverflow && gen.num !== 2) {
@@ -634,10 +634,10 @@ function getEndOfTurn(
     }
   } else if (defender.hasStatus('brn')) {
     if (defender.hasAbility('Heatproof')) {
-      damage -= Math.floor(defender.maxHP() / (gen.num > 6 ? 32 : 16));
+      damage -= Math.floor(defender.maxHP() / 16);
       texts.push('reduced burn damage');
     } else if (!defender.hasAbility('Magic Guard')) {
-      damage -= Math.floor(defender.maxHP() / (gen.num === 1 || gen.num > 6 ? 16 : 8));
+      damage -= Math.floor(defender.maxHP() / 8);
       texts.push('burn damage');
     }
   } else if (
