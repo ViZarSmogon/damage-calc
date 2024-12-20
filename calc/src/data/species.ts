@@ -5024,7 +5024,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   Aggron: {otherFormes: ['Aggron-Mega']},
   Alakazam: {otherFormes: ['Alakazam-Mega']},
   Altaria: {otherFormes: ['Altaria-Mega']},
-  Ampharos: {bs: {otherFormes: ['Ampharos-Mega']},
+  Ampharos: {otherFormes: ['Ampharos-Mega']},
   Audino: {otherFormes: ['Audino-Mega']},
   Azumarill: {types: ['Water', 'Fairy']},
   Azurill: {types: ['Normal', 'Fairy']},

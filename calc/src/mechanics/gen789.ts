@@ -1311,8 +1311,7 @@ export function calculateAttackSMSSSV(
       ? getStatDescriptionText(gen, defender, attackStat, defender.nature)
       : getStatDescriptionText(gen, attacker, attackStat, attacker.nature);
   const attackSource = move.named('Foul Play') ? defender : attacker;
-  if (attackSource.boosts[attackStat] === 0 ||
-      (isCritical && attackSource.boosts[attackStat] < 0)) {
+  if (attackSource.boosts[attackStat] === 0 || isCritical) {
     attack = attackSource.rawStats[attackStat];
   } else if (defender.hasAbility('Unaware')) {
     attack = attackSource.rawStats[attackStat];
@@ -1502,9 +1501,7 @@ export function calculateDefenseSMSSSV(
     (move.named('Shell Side Arm') && getShellSideArmCategory(attacker, defender) === 'Physical');
   const defenseStat = hitsPhysical ? 'def' : 'spd';
   desc.defenseEVs = getStatDescriptionText(gen, defender, defenseStat, defender.nature);
-  if (defender.boosts[defenseStat] === 0 ||
-      (isCritical && defender.boosts[defenseStat] > 0) ||
-      move.ignoreDefensive) {
+  if (defender.boosts[defenseStat] === 0 || isCritical || move.ignoreDefensive) {
     defense = defender.rawStats[defenseStat];
   } else if (attacker.hasAbility('Unaware')) {
     defense = defender.rawStats[defenseStat];
@@ -1662,7 +1659,7 @@ function calculateBaseDamageSMSSSV(
   }
 
   if (isCritical) {
-    baseDamage = Math.floor(OF32(baseDamage * 1.167));
+    baseDamage = Math.floor(OF32(baseDamage * 7 / 6));
     desc.isCritical = isCritical;
   }
 
