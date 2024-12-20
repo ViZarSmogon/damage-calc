@@ -477,9 +477,9 @@ export function calculateSMSSSV(
   if ((defender.hasAbility('Wonder Guard') && typeEffectiveness <= 1) ||
       (move.hasType('Grass') && defender.hasAbility('Sap Sipper')) ||
       (move.hasType('Fire') && defender.hasAbility('Flash Fire', 'Well-Baked Body')) ||
-      (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Storm Drain', 'Water Absorb')) ||
+      (move.hasType('Water') && defender.hasAbility('Dry Skin', 'Water Absorb')) ||
       (move.hasType('Electric') &&
-        defender.hasAbility('Lightning Rod', 'Motor Drive', 'Volt Absorb')) ||
+        defender.hasAbility('Motor Drive', 'Volt Absorb')) ||
       (move.hasType('Ground') &&
         !field.isGravity && !move.named('Thousand Arrows') &&
         !defender.hasItem('Iron Ball') && defender.hasAbility('Levitate')) ||
@@ -1265,7 +1265,7 @@ export function calculateBPModsSMSSSV(
     (attacker.hasItem('Soul Dew') &&
      attacker.named('Latios', 'Latias', 'Latios-Mega', 'Latias-Mega') &&
      move.hasType('Psychic', 'Dragon')) ||
-     attacker.item && move.hasType(getItemBoostType(attacker.item)) ||
+     (attacker.item && move.hasType(getItemBoostType(attacker.item)) && attacker.item.includes('Plate')) ||
     (attacker.name.includes('Ogerpon-Cornerstone') && attacker.hasItem('Cornerstone Mask')) ||
     (attacker.name.includes('Ogerpon-Hearthflame') && attacker.hasItem('Hearthflame Mask')) ||
     (attacker.name.includes('Ogerpon-Wellspring') && attacker.hasItem('Wellspring Mask'))
@@ -1274,12 +1274,15 @@ export function calculateBPModsSMSSSV(
     desc.attackerItem = attacker.item;
   } else if (
     (attacker.hasItem('Muscle Band') && move.category === 'Physical') ||
-    (attacker.hasItem('Wise Glasses') && move.category === 'Special')
+    (attacker.hasItem('Wise Glasses') && move.category === 'Special') ||
+    (attacker.item && move.hasType(getItemBoostType(attacker.item)) && !attacker.item.includes('Plate') && !attacker.hasItem('Sea Incense'))
   ) {
     bpMods.push(4505);
     desc.attackerItem = attacker.item;
   } else if (attacker.hasItem('Punching Glove') && move.flags.punch) {
     bpMods.push(4506);
+  } else if (attacker.item && move.hasType(getItemBoostType(attacker.item)) && attacker.hasItem('Sea Incense')) {
+    bpMods.push(4300);
   }
   return bpMods;
 }
@@ -1470,7 +1473,7 @@ export function calculateAtModsSMSSSV(
       (attacker.hasItem('Deep Sea Tooth') &&
        attacker.named('Clamperl') &&
        move.category === 'Special') ||
-      (attacker.hasItem('Light Ball') && attacker.name.includes('Pikachu') && !move.isZ)
+      (attacker.hasItem('Light Ball') && attacker.name.includes('Pikachu') && move.category === 'Special' && !move.isZ)
   ) {
     atMods.push(8192);
     desc.attackerItem = attacker.item;
@@ -1512,10 +1515,6 @@ export function calculateDefenseSMSSSV(
   }
 
   // unlike all other defense modifiers, Sandstorm SpD boost gets applied directly
-  if (field.hasWeather('Sand') && defender.hasType('Rock') && !hitsPhysical) {
-    defense = pokeRound((defense * 3) / 2);
-    desc.weather = field.weather;
-  }
   if (field.hasWeather('Snow') && defender.hasType('Ice') && hitsPhysical) {
     defense = pokeRound((defense * 3) / 2);
     desc.weather = field.weather;
@@ -1663,7 +1662,7 @@ function calculateBaseDamageSMSSSV(
   }
 
   if (isCritical) {
-    baseDamage = Math.floor(OF32(baseDamage * 1.5));
+    baseDamage = Math.floor(OF32(baseDamage * 1.167));
     desc.isCritical = isCritical;
   }
 
@@ -1761,7 +1760,7 @@ export function calculateFinalModsSMSSSV(
   } else if (attacker.hasItem('Metronome') && move.timesUsedWithMetronome! >= 1) {
     const timesUsedWithMetronome = Math.floor(move.timesUsedWithMetronome!);
     if (timesUsedWithMetronome <= 4) {
-      finalMods.push(4096 + timesUsedWithMetronome * 819);
+      finalMods.push(4096 + timesUsedWithMetronome * 410);
     } else {
       finalMods.push(8192);
     }
