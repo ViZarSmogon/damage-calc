@@ -421,9 +421,9 @@ const SV: TypeChart = extend(true, {}, SS, {
   Rock: {Stellar: 1},
   Fighting: {Stellar: 1},
   Psychic: {Stellar: 1},
-  Ghost: {Stellar: 1},
+  Ghost: {Psychic: 0, Steel: 0.5, Stellar: 1},
   Dragon: {Stellar: 1},
-  Dark: {Stellar: 1},
+  Dark: {Steel: 0.5, Stellar: 1},
   Steel: {Stellar: 1},
   Fairy: {Stellar: 1},
   Stellar: {

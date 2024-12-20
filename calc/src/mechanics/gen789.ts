@@ -376,8 +376,7 @@ export function calculateSMSSSV(
   // FIXME: this is incorrect, should be move.flags.heal, not move.drain
   if ((attacker.hasAbility('Triage') && move.drain) ||
       (attacker.hasAbility('Gale Wings') &&
-       move.hasType('Flying') &&
-       attacker.curHP() === attacker.maxHP())) {
+       move.hasType('Flying'))) {
     move.priority = 1;
     desc.attackerAbility = attacker.ability;
   }
@@ -787,7 +786,7 @@ export function calculateBasePowerSMSSSV(
 
   switch (move.name) {
   case 'Payback':
-    basePower = move.bp * (turnOrder === 'last' ? 2 : 1);
+    basePower = move.bp * (turnOrder !== 'first' ? 2 : 1);
     desc.moveBP = basePower;
     break;
   case 'Bolt Beak':
@@ -1122,7 +1121,7 @@ export function calculateBPModsSMSSSV(
 
   // Field effects
 
-  const terrainMultiplier = gen.num > 7 ? 5325 : 6144;
+  const terrainMultiplier = 6144;
   if (isGrounded(attacker, field)) {
     if ((field.hasTerrain('Electric') && move.hasType('Electric')) ||
         (field.hasTerrain('Grassy') && move.hasType('Grass')) ||
@@ -1207,7 +1206,7 @@ export function calculateBPModsSMSSSV(
   if (attacker.hasAbility('Rivalry') && ![attacker.gender, defender.gender].includes('N')) {
     if (attacker.gender === defender.gender) {
       bpMods.push(5120);
-      desc.rivalry = 'buffed';
+      desc.rivalry = 'buffed';	
     } else {
       bpMods.push(3072);
       desc.rivalry = 'nerfed';
@@ -1218,7 +1217,7 @@ export function calculateBPModsSMSSSV(
   // The -ate abilities already changed move typing earlier, so most checks are done and desc is set
   // However, Max Moves also don't boost -ate Abilities
   if (!move.isMax && hasAteAbilityTypeChange) {
-    bpMods.push(4915);
+    bpMods.push(5325);
   }
 
   if ((attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage)) ||
@@ -1246,7 +1245,7 @@ export function calculateBPModsSMSSSV(
   // Items
 
   if (attacker.hasItem(`${move.type} Gem`)) {
-    bpMods.push(5325);
+    bpMods.push(6144);
     desc.attackerItem = attacker.item;
   } else if (
     (((attacker.hasItem('Adamant Crystal') && attacker.named('Dialga-Origin')) ||
@@ -1385,7 +1384,7 @@ export function calculateAtModsSMSSSV(
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Transistor') && move.hasType('Electric')) {
-    atMods.push(gen.num >= 9 ? 5325 : 6144);
+    atMods.push(6144);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Stakeout') && attacker.abilityOn) {
     atMods.push(8192);
@@ -1475,8 +1474,11 @@ export function calculateAtModsSMSSSV(
     atMods.push(8192);
     desc.attackerItem = attacker.item;
     // Choice Band/Scarf/Specs move lock and stat boosts are ignored during Dynamax (Anubis)
-  } else if (!move.isZ && !move.isMax &&
-    ((attacker.hasItem('Choice Band') && move.category === 'Physical') ||
+  } else if (!move.isZ && !move.isMax && 
+    ((attacker.hasItem('Soul Dew') &&
+      attacker.named('Latios', 'Latias', 'Latios-Mega', 'Latias-Mega') &&
+      move.category === 'Special') ||
+      (attacker.hasItem('Choice Band') && move.category === 'Physical') ||
       (attacker.hasItem('Choice Specs') && move.category === 'Special'))
   ) {
     atMods.push(6144);
@@ -1519,6 +1521,9 @@ export function calculateDefenseSMSSSV(
   if (field.hasWeather('Snow') && defender.hasType('Ice') && hitsPhysical) {
     defense = pokeRound((defense * 3) / 2);
     desc.weather = field.weather;
+  } 
+  if (move.named('Explosion') || move.named('Self-Destruct')) {
+    defense = Math.floor(defense * 0.5);
   }
 
   const dfMods = calculateDfModsSMSSSV(
@@ -1603,7 +1608,9 @@ export function calculateDfModsSMSSSV(
     }
   }
 
-  if ((defender.hasItem('Eviolite') &&
+  if ((!hitsPhysical && defender.hasItem('Soul Dew') &&
+      defender.named('Latios', 'Latias', 'Latios-Mega', 'Latias-Mega')) ||
+      (defender.hasItem('Eviolite') &&
       (defender.name === 'Dipplin' || gen.species.get(toID(defender.name))?.nfe)) ||
       (!hitsPhysical && defender.hasItem('Assault Vest'))) {
     dfMods.push(6144);
@@ -1638,7 +1645,7 @@ function calculateBaseDamageSMSSSV(
   }
 
   if (attacker.hasAbility('Parental Bond (Child)')) {
-    baseDamage = pokeRound(OF32(baseDamage * 1024) / 4096);
+    baseDamage = pokeRound(OF32(baseDamage * 2048) / 4096);
   }
 
   if (
@@ -1663,7 +1670,7 @@ function calculateBaseDamageSMSSSV(
   }
 
   if (isCritical) {
-    baseDamage = Math.floor(OF32(baseDamage * 1.5));
+    baseDamage = Math.floor(OF32(baseDamage * 2));
     desc.isCritical = isCritical;
   }
 
