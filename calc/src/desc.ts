@@ -593,7 +593,7 @@ function getEndOfTurn(
   if (field.defenderSide.isSeeded) {
     if (!defender.hasAbility('Magic Guard')) {
       // 1/16 in gen 1, 1/8 in gen 2 onwards
-      damage -= Math.floor(defender.maxHP() / (gen.num >= 2 ? 8 : 16));
+      damage -= Math.floor(defender.maxHP() / 16);
       texts.push('Leech Seed damage');
     }
   }
@@ -622,7 +622,7 @@ function getEndOfTurn(
       damage += Math.floor(defender.maxHP() / 8);
       texts.push('Poison Heal');
     } else if (!defender.hasAbility('Magic Guard')) {
-      damage -= Math.floor(defender.maxHP() / (gen.num === 1 ? 16 : 8));
+      damage -= Math.floor(defender.maxHP() / 16);
       texts.push('poison damage');
     }
   } else if (defender.hasStatus('tox')) {
@@ -651,10 +651,10 @@ function getEndOfTurn(
 
   if (!defender.hasAbility('Magic Guard') && TRAPPING.includes(move.name)) {
     if (attacker.hasItem('Binding Band')) {
-      damage -= gen.num > 5 ? Math.floor(defender.maxHP() / 6) : Math.floor(defender.maxHP() / 8);
+      damage -= Math.floor(defender.maxHP() / 8);
       texts.push('trapping damage');
     } else {
-      damage -= gen.num > 5 ? Math.floor(defender.maxHP() / 8) : Math.floor(defender.maxHP() / 16);
+      damage -= Math.floor(defender.maxHP() / 16);
       texts.push('trapping damage');
     }
   }
