@@ -29,7 +29,7 @@ const RBY: {[name: string]: SpeciesData} = {
     nfe: true,
   },
   Aerodactyl: {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 80, at: 105, df: 65, sp: 130, sl: 60},
     weightkg: 59,
   },
@@ -229,7 +229,7 @@ const RBY: {[name: string]: SpeciesData} = {
     weightkg: 40.5,
   },
   Geodude: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 40, at: 80, df: 100, sp: 20, sl: 30},
     weightkg: 20,
     nfe: true,
@@ -253,12 +253,12 @@ const RBY: {[name: string]: SpeciesData} = {
   },
   Golduck: {types: ['Water'], bs: {hp: 80, at: 82, df: 78, sp: 85, sl: 80}, weightkg: 76.6},
   Golem: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 80, at: 110, df: 130, sp: 45, sl: 55},
     weightkg: 300,
   },
   Graveler: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 55, at: 95, df: 115, sp: 35, sl: 45},
     weightkg: 105,
     nfe: true,
@@ -330,13 +330,13 @@ const RBY: {[name: string]: SpeciesData} = {
     weightkg: 40.6,
   },
   Kabuto: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 30, at: 80, df: 90, sp: 55, sl: 45},
     weightkg: 11.5,
     nfe: true,
   },
   Kabutops: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 60, at: 115, df: 105, sp: 80, sl: 70},
     weightkg: 40.5,
   },
@@ -505,18 +505,18 @@ const RBY: {[name: string]: SpeciesData} = {
     nfe: true,
   },
   Omanyte: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 35, at: 40, df: 100, sp: 35, sl: 90},
     weightkg: 7.5,
     nfe: true,
   },
   Omastar: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 70, at: 60, df: 125, sp: 55, sl: 115},
     weightkg: 35,
   },
   Onix: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 35, at: 45, df: 160, sp: 70, sl: 30},
     weightkg: 210,
   },
@@ -613,12 +613,12 @@ const RBY: {[name: string]: SpeciesData} = {
     nfe: true,
   },
   Rhydon: {
-    types: ['Ground', 'Rock'],
+    types: ['Ground'],
     bs: {hp: 105, at: 130, df: 120, sp: 40, sl: 45},
     weightkg: 120,
   },
   Rhyhorn: {
-    types: ['Ground', 'Rock'],
+    types: ['Ground'],
     bs: {hp: 80, at: 85, df: 95, sp: 25, sl: 30},
     weightkg: 115,
     nfe: true,
@@ -1008,7 +1008,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Corsola: {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 55, at: 55, df: 85, sa: 65, sd: 85, sp: 35},
     weightkg: 5,
   },
@@ -1154,7 +1154,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     weightkg: 22.5,
   },
   Larvitar: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 50, at: 64, df: 50, sa: 45, sd: 50, sp: 41},
     weightkg: 72,
     nfe: true,
@@ -1183,7 +1183,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Magcargo: {
-    types: ['Fire', 'Rock'],
+    types: ['Fire', 'Ground'],
     bs: {hp: 50, at: 50, df: 120, sa: 80, sd: 80, sp: 30},
     weightkg: 55,
   },
@@ -1275,7 +1275,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Pupitar: {
-    types: ['Rock', 'Ground'],
+    types: ['Ground'],
     bs: {hp: 70, at: 84, df: 70, sa: 65, sd: 70, sp: 51},
     weightkg: 152,
     nfe: true,
@@ -1320,7 +1320,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Shuckle: {
-    types: ['Bug', 'Rock'],
+    types: ['Bug', 'Ground'],
     bs: {hp: 20, at: 10, df: 230, sa: 10, sd: 230, sp: 5},
     weightkg: 20.5,
   },
@@ -1381,7 +1381,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     weightkg: 400,
   },
   Sudowoodo: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 70, at: 100, df: 115, sa: 30, sd: 65, sp: 30},
     weightkg: 38,
   },
@@ -1437,7 +1437,7 @@ const GSC_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     weightkg: 79.5,
   },
   Tyranitar: {
-    types: ['Rock', 'Dark'],
+    types: ['Ground', 'Dark'],
     bs: {hp: 100, at: 134, df: 110, sa: 95, sd: 100, sp: 61},
     weightkg: 202,
   },
@@ -1745,7 +1745,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Pressure'},
   },
   Aggron: {
-    types: ['Steel', 'Rock'],
+    types: ['Steel', 'Ground'],
     bs: {hp: 70, at: 110, df: 180, sa: 60, sd: 60, sp: 50},
     weightkg: 360,
     abilities: {0: 'Sturdy'},
@@ -1757,20 +1757,20 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Natural Cure'},
   },
   Anorith: {
-    types: ['Rock', 'Bug'],
+    types: ['Ground', 'Bug'],
     bs: {hp: 45, at: 95, df: 50, sa: 40, sd: 50, sp: 75},
     weightkg: 12.5,
     nfe: true,
     abilities: {0: 'Battle Armor'},
   },
   Armaldo: {
-    types: ['Rock', 'Bug'],
+    types: ['Ground', 'Bug'],
     bs: {hp: 75, at: 125, df: 100, sa: 70, sd: 80, sp: 45},
     weightkg: 68.2,
     abilities: {0: 'Battle Armor'},
   },
   Aron: {
-    types: ['Steel', 'Rock'],
+    types: ['Steel', 'Ground'],
     bs: {hp: 50, at: 70, df: 100, sa: 40, sd: 40, sp: 30},
     weightkg: 60,
     nfe: true,
@@ -1933,7 +1933,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Hyper Cutter'},
   },
   Cradily: {
-    types: ['Rock', 'Grass'],
+    types: ['Ground', 'Grass'],
     bs: {hp: 86, at: 81, df: 97, sa: 81, sd: 107, sp: 43},
     weightkg: 60.4,
     abilities: {0: 'Suction Cups'},
@@ -2118,7 +2118,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Lairon: {
-    types: ['Steel', 'Rock'],
+    types: ['Steel', 'Ground'],
     bs: {hp: 60, at: 90, df: 140, sa: 50, sd: 50, sp: 40},
     weightkg: 120,
     nfe: true,
@@ -2137,7 +2137,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Levitate'},
   },
   Lileep: {
-    types: ['Rock', 'Grass'],
+    types: ['Ground', 'Grass'],
     bs: {hp: 66, at: 41, df: 77, sa: 61, sd: 87, sp: 23},
     weightkg: 23.8,
     nfe: true,
@@ -2177,7 +2177,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Swift Swim'},
   },
   Lunatone: {
-    types: ['Rock', 'Psychic'],
+    types: ['Ground', 'Psychic'],
     bs: {hp: 70, at: 55, df: 65, sa: 95, sd: 85, sp: 70},
     weightkg: 168,
     abilities: {0: 'Levitate'},
@@ -2288,7 +2288,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Speed Boost'},
   },
   Nosepass: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 30, at: 45, df: 135, sa: 45, sd: 90, sp: 30},
     weightkg: 97,
     abilities: {0: 'Sturdy'},
@@ -2348,7 +2348,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Clear Body'},
   },
   Regirock: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 80, at: 100, df: 200, sa: 50, sd: 100, sp: 50},
     weightkg: 230,
     gender: 'N',
@@ -2362,7 +2362,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Clear Body'},
   },
   Relicanth: {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 100, at: 90, df: 130, sa: 45, sd: 65, sp: 55},
     weightkg: 23.4,
     abilities: {0: 'Swift Swim'},
@@ -2486,7 +2486,7 @@ const ADV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Inner Focus'},
   },
   Solrock: {
-    types: ['Rock', 'Psychic'],
+    types: ['Ground', 'Psychic'],
     bs: {hp: 70, at: 95, df: 85, sa: 55, sd: 65, sp: 70},
     weightkg: 154,
     abilities: {0: 'Levitate'},
@@ -2836,7 +2836,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Arceus',
   },
   'Arceus-Rock': {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 120, at: 120, df: 120, sa: 120, sd: 120, sp: 120},
     weightkg: 320,
     abilities: {0: 'Multitype'},
@@ -2873,7 +2873,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Bastiodon: {
-    types: ['Rock', 'Steel'],
+    types: ['Ground', 'Steel'],
     bs: {hp: 60, at: 52, df: 168, sa: 47, sd: 138, sp: 30},
     weightkg: 149.5,
     abilities: {0: 'Sturdy'},
@@ -2892,7 +2892,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Simple'},
   },
   Bonsly: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 50, at: 80, df: 95, sa: 10, sd: 45, sp: 10},
     weightkg: 15,
     nfe: true,
@@ -3009,7 +3009,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Honey Gather'},
   },
   Cranidos: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 67, at: 125, df: 40, sa: 30, sd: 30, sp: 58},
     weightkg: 31.5,
     nfe: true,
@@ -3461,7 +3461,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Unaware'},
   },
   Probopass: {
-    types: ['Rock', 'Steel'],
+    types: ['Ground', 'Steel'],
     bs: {hp: 60, at: 55, df: 145, sa: 75, sd: 150, sp: 40},
     weightkg: 340,
     abilities: {0: 'Sturdy'},
@@ -3486,13 +3486,13 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Rock Head'},
   },
   Rampardos: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 97, at: 165, df: 60, sa: 65, sd: 50, sp: 58},
     weightkg: 102.5,
     abilities: {0: 'Mold Breaker'},
   },
   Rebble: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 45, at: 25, df: 65, sa: 75, sd: 55, sp: 80},
     weightkg: 7,
     nfe: true,
@@ -3513,7 +3513,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Air Lock'},
   },
   Rhyperior: {
-    types: ['Ground', 'Rock'],
+    types: ['Ground'],
     bs: {hp: 115, at: 140, df: 130, sa: 55, sd: 55, sp: 40},
     weightkg: 282.8,
     abilities: {0: 'Lightning Rod'},
@@ -3603,7 +3603,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Sticky Hold'},
   },
   Shieldon: {
-    types: ['Rock', 'Steel'],
+    types: ['Ground', 'Steel'],
     bs: {hp: 30, at: 42, df: 118, sa: 42, sd: 88, sp: 30},
     weightkg: 57,
     nfe: true,
@@ -3663,7 +3663,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Keen Eye'},
   },
   Stratagem: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 90, at: 60, df: 65, sa: 120, sd: 70, sp: 130},
     weightkg: 45,
     gender: 'N',
@@ -3690,7 +3690,7 @@ const DPP_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Compound Eyes'},
   },
   Tactite: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 70, at: 40, df: 65, sa: 100, sd: 65, sp: 95},
     weightkg: 16,
     nfe: true,
@@ -3816,14 +3816,14 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Effect Spore'},
   },
   Archen: {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 55, at: 112, df: 45, sa: 74, sd: 45, sp: 70},
     weightkg: 9.5,
     abilities: {0: 'Defeatist'},
     nfe: true,
   },
   Archeops: {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 75, at: 140, df: 65, sa: 112, sd: 65, sp: 110},
     weightkg: 32,
     abilities: {0: 'Defeatist'},
@@ -3894,7 +3894,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Lightning Rod'},
   },
   Boldore: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 70, at: 105, df: 105, sa: 50, sd: 40, sp: 20},
     weightkg: 102,
     nfe: true,
@@ -3920,7 +3920,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Keen Eye'},
   },
   Carracosta: {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 74, at: 108, df: 133, sa: 83, sd: 65, sp: 32},
     weightkg: 81,
     abilities: {0: 'Solid Rock'},
@@ -3977,7 +3977,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Prankster'},
   },
   Crustle: {
-    types: ['Bug', 'Rock'],
+    types: ['Bug', 'Ground'],
     bs: {hp: 70, at: 95, df: 125, sa: 65, sd: 75, sp: 45},
     weightkg: 200,
     abilities: {0: 'Sturdy'},
@@ -4079,7 +4079,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Swarm'},
   },
   Dwebble: {
-    types: ['Bug', 'Rock'],
+    types: ['Bug', 'Ground'],
     bs: {hp: 50, at: 65, df: 85, sa: 35, sd: 35, sp: 55},
     weightkg: 14.5,
     nfe: true,
@@ -4216,7 +4216,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Genesect',
   },
   Gigalith: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 85, at: 135, df: 130, sa: 60, sd: 70, sp: 25},
     weightkg: 260,
     abilities: {0: 'Sturdy'},
@@ -4621,7 +4621,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Overcoat'},
   },
   Roggenrola: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 55, at: 75, df: 85, sa: 25, sd: 25, sp: 15},
     weightkg: 18,
     nfe: true,
@@ -4795,7 +4795,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Blaze'},
   },
   Terrakion: {
-    types: ['Rock', 'Fighting'],
+    types: ['Ground', 'Fighting'],
     bs: {hp: 91, at: 129, df: 90, sa: 72, sd: 90, sp: 108},
     weightkg: 260,
     abilities: {0: 'Justified'},
@@ -4829,7 +4829,7 @@ const BW_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Guts'},
   },
   Tirtouga: {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 54, at: 78, df: 103, sa: 53, sd: 45, sp: 22},
     weightkg: 16.5,
     nfe: true,
@@ -5139,7 +5139,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Aegislash-Blade',
   },
   Amaura: {
-    types: ['Rock', 'Ice'],
+    types: ['Ground', 'Ice'],
     bs: {hp: 77, at: 59, df: 50, sa: 67, sd: 63, sp: 46},
     weightkg: 25.2,
     nfe: true,
@@ -5160,7 +5160,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Healer'},
   },
   Aurorus: {
-    types: ['Rock', 'Ice'],
+    types: ['Ground', 'Ice'],
     bs: {hp: 123, at: 77, df: 72, sa: 99, sd: 92, sp: 58},
     weightkg: 225,
     abilities: {0: 'Refrigerate'},
@@ -5172,7 +5172,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Own Tempo'},
   },
   Barbaracle: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 72, at: 105, df: 115, sa: 54, sd: 86, sp: 68},
     weightkg: 96,
     abilities: {0: 'Tough Claws'},
@@ -5185,7 +5185,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Own Tempo'},
   },
   Binacle: {
-    types: ['Rock', 'Water'],
+    types: ['Ground', 'Water'],
     bs: {hp: 42, at: 52, df: 67, sa: 39, sd: 56, sp: 50},
     weightkg: 31,
     nfe: true,
@@ -5213,7 +5213,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Water Veil'},
   },
   Carbink: {
-    types: ['Rock', 'Fairy'],
+    types: ['Ground', 'Fairy'],
     bs: {hp: 50, at: 50, df: 150, sa: 50, sd: 150, sp: 50},
     weightkg: 5.7,
     gender: 'N',
@@ -5246,14 +5246,14 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Mega Launcher'},
   },
   Crucibelle: {
-    types: ['Rock', 'Poison'],
+    types: ['Ground', 'Poison'],
     bs: {hp: 106, at: 105, df: 65, sa: 75, sd: 85, sp: 104},
     weightkg: 23.6,
     abilities: {0: 'Regenerator'},
     otherFormes: ['Crucibelle-Mega'],
   },
   Diancie: {
-    types: ['Rock', 'Fairy'],
+    types: ['Ground', 'Fairy'],
     bs: {hp: 50, at: 100, df: 150, sa: 100, sd: 150, sp: 50},
     weightkg: 8.8,
     abilities: {0: 'Clear Body'},
@@ -5516,7 +5516,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Absol',
   },
   'Aerodactyl-Mega': {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 80, at: 135, df: 85, sa: 70, sd: 95, sp: 150},
     weightkg: 79,
     abilities: {0: 'Tough Claws'},
@@ -5607,14 +5607,14 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Charizard',
   },
   'Crucibelle-Mega': {
-    types: ['Rock', 'Poison'],
+    types: ['Ground', 'Poison'],
     bs: {hp: 106, at: 135, df: 75, sa: 85, sd: 125, sp: 114},
     weightkg: 22.5,
     abilities: {0: 'Magic Guard'},
     baseSpecies: 'Crucibelle',
   },
   'Diancie-Mega': {
-    types: ['Rock', 'Fairy'],
+    types: ['Ground', 'Fairy'],
     bs: {hp: 50, at: 160, df: 110, sa: 160, sd: 110, sp: 110},
     weightkg: 27.8,
     abilities: {0: 'Magic Bounce'},
@@ -5836,7 +5836,7 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Swampert',
   },
   'Tyranitar-Mega': {
-    types: ['Rock', 'Dark'],
+    types: ['Ground', 'Dark'],
     bs: {hp: 100, at: 164, df: 150, sa: 95, sd: 120, sp: 71},
     weightkg: 255,
     abilities: {0: 'Sand Stream'},
@@ -6099,13 +6099,13 @@ const XY_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Natural Cure'},
   },
   Tyrantrum: {
-    types: ['Rock', 'Dragon'],
+    types: ['Ground', 'Dragon'],
     bs: {hp: 82, at: 121, df: 119, sa: 69, sd: 59, sp: 71},
     weightkg: 270,
     abilities: {0: 'Strong Jaw'},
   },
   Tyrunt: {
-    types: ['Rock', 'Dragon'],
+    types: ['Ground', 'Dragon'],
     bs: {hp: 58, at: 89, df: 77, sa: 45, sd: 45, sp: 48},
     weightkg: 26,
     nfe: true,
@@ -6456,7 +6456,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Leaf Guard'},
   },
   'Geodude-Alola': {
-    types: ['Rock', 'Electric'],
+    types: ['Ground', 'Electric'],
     bs: {hp: 40, at: 80, df: 100, sa: 30, sd: 30, sp: 20},
     weightkg: 20.3,
     baseSpecies: 'Geodude',
@@ -6464,7 +6464,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Magnet Pull'},
   },
   'Golem-Alola': {
-    types: ['Rock', 'Electric'],
+    types: ['Ground', 'Electric'],
     bs: {hp: 80, at: 120, df: 130, sa: 55, sd: 65, sp: 45},
     weightkg: 316,
     abilities: {0: 'Magnet Pull'},
@@ -6477,7 +6477,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Emergency Exit'},
   },
   'Graveler-Alola': {
-    types: ['Rock', 'Electric'],
+    types: ['Ground', 'Electric'],
     bs: {hp: 55, at: 95, df: 115, sa: 45, sd: 45, sp: 35},
     weightkg: 110,
     baseSpecies: 'Graveler',
@@ -6624,21 +6624,21 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Lurantis',
   },
   Lycanroc: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 75, at: 115, df: 65, sa: 55, sd: 65, sp: 112},
     weightkg: 25,
     otherFormes: ['Lycanroc-Dusk', 'Lycanroc-Midnight'],
     abilities: {0: 'Keen Eye'},
   },
   'Lycanroc-Dusk': {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 75, at: 117, df: 65, sa: 55, sd: 65, sp: 110},
     weightkg: 25,
     abilities: {0: 'Tough Claws'},
     baseSpecies: 'Lycanroc',
   },
   'Lycanroc-Midnight': {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 85, at: 115, df: 75, sa: 55, sd: 75, sp: 82},
     weightkg: 25,
     baseSpecies: 'Lycanroc',
@@ -6732,7 +6732,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Disguise'},
   },
   Minior: {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 60, at: 100, df: 60, sa: 100, sd: 60, sp: 120},
     weightkg: 0.3,
     otherFormes: ['Minior-Meteor'],
@@ -6740,7 +6740,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Shields Down'},
   },
   'Minior-Meteor': {
-    types: ['Rock', 'Flying'],
+    types: ['Ground', 'Flying'],
     bs: {hp: 60, at: 60, df: 100, sa: 60, sd: 100, sp: 60},
     weightkg: 40,
     gender: 'N',
@@ -6821,7 +6821,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Nihilego: {
-    types: ['Rock', 'Poison'],
+    types: ['Ground', 'Poison'],
     bs: {hp: 109, at: 53, df: 47, sa: 127, sd: 131, sp: 103},
     weightkg: 55.5,
     abilities: {0: 'Beast Boost'},
@@ -7034,7 +7034,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Ribombee',
   },
   Rockruff: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 45, at: 65, df: 40, sa: 30, sd: 40, sp: 60},
     weightkg: 9.2,
     nfe: true,
@@ -7235,7 +7235,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   'Silvally-Rock': {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 95, at: 95, df: 95, sa: 95, sd: 95, sp: 95},
     weightkg: 100.5,
     abilities: {0: 'RKS System'},
@@ -7292,7 +7292,7 @@ const SM_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Stakataka: {
-    types: ['Rock', 'Steel'],
+    types: ['Ground', 'Steel'],
     bs: {hp: 61, at: 131, df: 211, sa: 53, sd: 101, sp: 13},
     weightkg: 820,
     abilities: {0: 'Beast Boost'},
@@ -7679,7 +7679,7 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Calyrex',
   },
   Carkol: {
-    types: ['Rock', 'Fire'],
+    types: ['Ground', 'Fire'],
     bs: {hp: 80, at: 60, df: 90, sa: 60, sd: 70, sp: 50},
     weightkg: 78,
     abilities: {0: 'Steam Engine'},
@@ -7742,14 +7742,14 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Coalossal: {
-    types: ['Rock', 'Fire'],
+    types: ['Ground', 'Fire'],
     bs: {hp: 110, at: 80, df: 120, sa: 80, sd: 90, sp: 30},
     weightkg: 310.5,
     abilities: {0: 'Steam Engine'},
     otherFormes: ['Coalossal-Gmax'],
   },
   'Coalossal-Gmax': {
-    types: ['Rock', 'Fire'],
+    types: ['Ground', 'Fire'],
     bs: {hp: 110, at: 80, df: 120, sa: 80, sd: 90, sp: 30},
     weightkg: 0,
     abilities: {0: 'Steam Engine'},
@@ -7889,14 +7889,14 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Drednaw: {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 90, at: 115, df: 90, sa: 48, sd: 68, sp: 74},
     weightkg: 115.5,
     abilities: {0: 'Strong Jaw'},
     otherFormes: ['Drednaw-Gmax'],
   },
   'Drednaw-Gmax': {
-    types: ['Water', 'Rock'],
+    types: ['Water', 'Ground'],
     bs: {hp: 90, at: 115, df: 90, sa: 48, sd: 68, sp: 74},
     weightkg: 0,
     abilities: {0: 'Strong Jaw'},
@@ -8389,7 +8389,7 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Rillaboom',
   },
   Rolycoly: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 30, at: 40, df: 50, sa: 40, sd: 50, sp: 30},
     weightkg: 12,
     abilities: {0: 'Steam Engine'},
@@ -8545,7 +8545,7 @@ const SS_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     gender: 'N',
   },
   Stonjourner: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 100, at: 125, df: 135, sa: 20, sd: 20, sp: 70},
     weightkg: 520,
     abilities: {0: 'Power Spot'},
@@ -8779,14 +8779,14 @@ const PLA_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   Zoroark: {otherFormes: ['Zoroark-Hisui']},
   Zorua: {otherFormes: ['Zorua-Hisui']},
   'Arcanine-Hisui': {
-    types: ['Fire', 'Rock'],
+    types: ['Fire', 'Ground'],
     bs: {hp: 95, at: 115, df: 80, sa: 95, sd: 80, sp: 90},
     weightkg: 168,
     abilities: {0: 'Intimidate'},
     baseSpecies: 'Arcanine',
   },
   'Avalugg-Hisui': {
-    types: ['Ice', 'Rock'],
+    types: ['Ice', 'Ground'],
     bs: {hp: 95, at: 127, df: 184, sa: 34, sd: 36, sp: 38},
     weightkg: 262.4,
     abilities: {0: 'Strong Jaw'},
@@ -8866,7 +8866,7 @@ const PLA_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Goodra',
   },
   'Growlithe-Hisui': {
-    types: ['Fire', 'Rock'],
+    types: ['Fire', 'Ground'],
     bs: {hp: 60, at: 75, df: 45, sa: 65, sd: 50, sp: 55},
     weightkg: 22.7,
     abilities: {0: 'Intimidate'},
@@ -8874,7 +8874,7 @@ const PLA_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Kleavor: {
-    types: ['Bug', 'Rock'],
+    types: ['Bug', 'Ground'],
     bs: {hp: 70, at: 135, df: 95, sa: 45, sd: 70, sp: 85},
     weightkg: 89,
     abilities: {0: 'Swarm'},
@@ -9264,7 +9264,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     nfe: true,
   },
   Garganacl: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 100, at: 100, df: 130, sa: 45, sd: 90, sp: 35},
     weightkg: 240,
     abilities: {0: 'Purifying Salt'},
@@ -9295,14 +9295,14 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Gimmighoul',
   },
   Glimmet: {
-    types: ['Rock', 'Poison'],
+    types: ['Ground', 'Poison'],
     bs: {hp: 48, at: 35, df: 42, sa: 105, sd: 60, sp: 60},
     weightkg: 8,
     abilities: {0: 'Toxic Debris'},
     nfe: true,
   },
   Glimmora: {
-    types: ['Rock', 'Poison'],
+    types: ['Ground', 'Poison'],
     bs: {hp: 83, at: 55, df: 90, sa: 130, sd: 81, sp: 86},
     weightkg: 45,
     abilities: {0: 'Toxic Debris'},
@@ -9360,7 +9360,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Quark Drive'},
   },
   'Iron Boulder': {
-    types: ['Rock', 'Psychic'],
+    types: ['Ground', 'Psychic'],
     bs: {hp: 90, at: 120, df: 80, sa: 68, sd: 108, sp: 124},
     weightkg: 162.5,
     gender: 'N',
@@ -9402,7 +9402,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Quark Drive'},
   },
   'Iron Thorns': {
-    types: ['Rock', 'Electric'],
+    types: ['Ground', 'Electric'],
     bs: {hp: 100, at: 134, df: 110, sa: 70, sd: 84, sp: 72},
     weightkg: 303,
     gender: 'N',
@@ -9435,7 +9435,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Defiant'},
   },
   Klawf: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 70, at: 100, df: 115, sa: 35, sd: 55, sp: 75},
     weightkg: 79,
     abilities: {0: 'Anger Shell'},
@@ -9509,14 +9509,14 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     abilities: {0: 'Toxic Chain'},
   },
   Nacli: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 55, at: 55, df: 75, sa: 35, sd: 35, sp: 25},
     weightkg: 16,
     abilities: {0: 'Purifying Salt'},
     nfe: true,
   },
   Naclstack: {
-    types: ['Rock'],
+    types: ['Ground'],
     bs: {hp: 60, at: 60, df: 100, sa: 35, sd: 65, sp: 35},
     weightkg: 105,
     abilities: {0: 'Purifying Salt'},
@@ -9556,7 +9556,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Ogerpon',
   },
   'Ogerpon-Cornerstone': {
-    types: ['Grass', 'Rock'],
+    types: ['Grass', 'Ground'],
     bs: {hp: 80, at: 120, df: 84, sa: 60, sd: 96, sp: 110},
     abilities: {0: 'Sturdy'},
     weightkg: 39.8,
@@ -9584,7 +9584,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     baseSpecies: 'Ogerpon',
   },
   'Ogerpon-Cornerstone-Tera': {
-    types: ['Grass', 'Rock'],
+    types: ['Grass', 'Ground'],
     bs: {hp: 80, at: 120, df: 84, sa: 60, sd: 96, sp: 110},
     abilities: {0: 'Embody Aspect (Cornerstone)'},
     weightkg: 39.8,

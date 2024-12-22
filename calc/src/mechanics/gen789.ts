@@ -239,7 +239,7 @@ export function calculateSMSSSV(
     type =
       field.hasWeather('Sun', 'Harsh Sunshine') && !holdingUmbrella ? 'Fire'
       : field.hasWeather('Rain', 'Heavy Rain') && !holdingUmbrella ? 'Water'
-      : field.hasWeather('Sand') ? 'Rock'
+      : field.hasWeather('Sand') ? 'Ground'
       : field.hasWeather('Hail', 'Snow') ? 'Ice'
       : 'Normal';
     desc.weather = field.weather;
@@ -308,7 +308,7 @@ export function calculateSMSSSV(
     field.defenderSide.isAuroraVeil = false;
   } else if (move.named('Ivy Cudgel')) {
     if (attacker.name.includes('Ogerpon-Cornerstone')) {
-      type = 'Rock';
+      type = 'Ground';
     } else if (attacker.name.includes('Ogerpon-Hearthflame')) {
       type = 'Fire';
     } else if (attacker.name.includes('Ogerpon-Wellspring')) {
@@ -1184,7 +1184,7 @@ export function calculateBPModsSMSSSV(
     (attacker.hasAbility('Sheer Force') &&
       (move.secondaries || move.named('Order Up')) && !move.isMax) ||
     (attacker.hasAbility('Sand Force') &&
-      field.hasWeather('Sand') && move.hasType('Rock', 'Ground', 'Steel')) ||
+      field.hasWeather('Sand') && move.hasType('Ground', 'Steel')) ||
     (attacker.hasAbility('Analytic') &&
       (turnOrder !== 'first' || field.defenderSide.isSwitching === 'out')) ||
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
@@ -1380,7 +1380,7 @@ export function calculateAtModsSMSSSV(
   } else if (
     (attacker.hasAbility('Steelworker') && move.hasType('Steel')) ||
     (attacker.hasAbility('Dragon\'s Maw') && move.hasType('Dragon')) ||
-    (attacker.hasAbility('Rocky Payload') && move.hasType('Rock'))
+    (attacker.hasAbility('Rocky Payload') && move.hasType('Ground'))
   ) {
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
@@ -1512,7 +1512,7 @@ export function calculateDefenseSMSSSV(
   }
 
   // unlike all other defense modifiers, Sandstorm SpD boost gets applied directly
-  if (field.hasWeather('Sand') && defender.hasType('Rock') && !hitsPhysical) {
+  if (field.hasWeather('Sand') && defender.hasType('Ground') && !hitsPhysical) {
     defense = pokeRound((defense * 3) / 2);
     desc.weather = field.weather;
   }

@@ -483,7 +483,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
     return {damage, texts};
   }
   if (defenderSide.isSR && !defender.hasAbility('Magic Guard', 'Mountaineer')) {
-    const rockType = gen.types.get('rock' as ID)!;
+    const rockType = gen.types.get('ground' as ID)!;
     const effectiveness =
       rockType.effectiveness[defender.types[0]]! *
       (defender.types[1] ? rockType.effectiveness[defender.types[1]]! : 1);
@@ -551,7 +551,7 @@ function getEndOfTurn(
     }
   } else if (field.hasWeather('Sand')) {
     if (
-      !defender.hasType('Rock', 'Ground', 'Steel') &&
+      !defender.hasType('Ground', 'Steel') &&
       !defender.hasAbility('Magic Guard', 'Overcoat', 'Sand Force', 'Sand Rush', 'Sand Veil') &&
       !defender.hasItem('Safety Goggles')
     ) {
@@ -688,7 +688,7 @@ function getEndOfTurn(
     texts.push('Cannonade damage');
   }
 
-  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Rock') &&
+  if (!defender.hasAbility('Magic Guard') && !defender.hasType('Ground') &&
       (field.defenderSide.volcalith || move.named('G-Max Volcalith'))) {
     damage -= Math.floor(defender.maxHP() / 6);
     texts.push('Volcalith damage');

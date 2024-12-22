@@ -181,7 +181,7 @@ $(".sl .dvs").keyup(function () {
 
 function getForcedTeraType(pokemonName) {
 	if (startsWith(pokemonName, "Ogerpon-Cornerstone")) {
-		return "Rock";
+		return "Ground";
 	} else if (startsWith(pokemonName, "Ogerpon-Hearthflame")) {
 		return "Fire";
 	} else if (pokemonName === "Ogerpon" || startsWith(pokemonName, "Ogerpon-Teal")) {
