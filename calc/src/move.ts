@@ -270,7 +270,7 @@ export function getMaxMoveName(
       if (pokemonAbility === 'Galvanize') return 'Max Lightning';
     }
   }
-  if (moveType === 'Fairy') {
+  if (moveType === 'Psychic') {
     if (pokemonSpecies === 'Alcremie-Gmax') return 'G-Max Finale';
     if (pokemonSpecies === 'Hatterene-Gmax') return 'G-Max Smite';
   }
@@ -300,15 +300,15 @@ export function getMaxMoveName(
     if (pokemonSpecies === 'Grimmsnarl-Gmax') return 'G-Max Snooze';
     if (pokemonSpecies === 'Urshifu-Gmax') return 'G-Max One Blow';
   }
-  if (moveType === 'Poison' && pokemonSpecies === 'Garbodor-Gmax') return 'G-Max Malodor';
+  if (moveType === 'Dark' && pokemonSpecies === 'Garbodor-Gmax') return 'G-Max Malodor';
   if (moveType === 'Fighting' && pokemonSpecies === 'Machamp-Gmax') return 'G-Max Chi Strike';
-  if (moveType === 'Ghost' && pokemonSpecies === 'Gengar-Gmax') return 'G-Max Terror';
-  if (moveType === 'Ice' && pokemonSpecies === 'Lapras-Gmax') return 'G-Max Resonance';
-  if (moveType === 'Flying' && pokemonSpecies === 'Corviknight-Gmax') return 'G-Max Wind Rage';
+  if (moveType === 'Psychic' && pokemonSpecies === 'Gengar-Gmax') return 'G-Max Terror';
+  if (moveType === 'Water' && pokemonSpecies === 'Lapras-Gmax') return 'G-Max Resonance';
+  if (moveType === 'Normal' && pokemonSpecies === 'Corviknight-Gmax') return 'G-Max Wind Rage';
   if (moveType === 'Dragon' && pokemonSpecies === 'Duraludon-Gmax') return 'G-Max Depletion';
   if (moveType === 'Psychic' && pokemonSpecies === 'Orbeetle-Gmax') return 'G-Max Gravitas';
-  if (moveType === 'Rock' && pokemonSpecies === 'Coalossal-Gmax') return 'G-Max Volcalith';
-  if (moveType === 'Ground' && pokemonSpecies === 'Sandaconda-Gmax') return 'G-Max Sandblast';
+  if (moveType === 'Fighting' && pokemonSpecies === 'Coalossal-Gmax') return 'G-Max Volcalith';
+  if (moveType === 'Fighting' && pokemonSpecies === 'Sandaconda-Gmax') return 'G-Max Sandblast';
   if (moveType === 'Dark' && pokemonSpecies === 'Grimmsnarl-Gmax') return 'G-Max Snooze';
   return 'Max ' + MAXMOVES_TYPING[moveType];
 }

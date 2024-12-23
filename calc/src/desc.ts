@@ -483,7 +483,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
     return {damage, texts};
   }
   if (defenderSide.isSR && !defender.hasAbility('Magic Guard', 'Mountaineer')) {
-    const rockType = gen.types.get('rock' as ID)!;
+    const rockType = gen.types.get('fighting' as ID)!;
     const effectiveness =
       rockType.effectiveness[defender.types[0]]! *
       (defender.types[1] ? rockType.effectiveness[defender.types[1]]! : 1);

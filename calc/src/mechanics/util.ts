@@ -29,7 +29,7 @@ const EV_ITEMS = [
 
 export function isGrounded(pokemon: Pokemon, field: Field) {
   return (field.isGravity || pokemon.hasItem('Iron Ball') ||
-    (!pokemon.hasType('Flying') &&
+    (!pokemon.hasType('Normal') &&
       !pokemon.hasAbility('Levitate') &&
       !pokemon.hasItem('Air Balloon')));
 }
@@ -140,9 +140,9 @@ export function getMoveEffectiveness(
   isGravity?: boolean,
   isRingTarget?: boolean,
 ) {
-  if (isGhostRevealed && type === 'Ghost' && move.hasType('Normal', 'Fighting')) {
+  if (isGhostRevealed && type === 'Normal' && move.hasType('Fighting')) {
     return 1;
-  } else if (isGravity && type === 'Flying' && move.hasType('Ground')) {
+  } else if (isGravity && type === 'Normal' && move.hasType('Fighting')) {
     return 1;
   } else if (move.named('Freeze-Dry') && type === 'Water') {
     return 2;
@@ -153,7 +153,7 @@ export function getMoveEffectiveness(
     }
     if (move.named('Flying Press')) {
       // Can only do this because flying has no other interactions
-      effectiveness *= gen.types.get('flying' as ID)!.effectiveness[type]!;
+      effectiveness *= gen.types.get('normal' as ID)!.effectiveness[type]!;
     }
     return effectiveness;
   }
@@ -185,7 +185,7 @@ export function checkForecast(pokemon: Pokemon, weather?: Weather) {
       break;
     case 'Hail':
     case 'Snow':
-      pokemon.types = ['Ice'];
+      pokemon.types = ['Water'];
       break;
     default:
       pokemon.types = ['Normal'];

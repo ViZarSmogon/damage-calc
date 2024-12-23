@@ -405,7 +405,7 @@ export function getTechnoBlast(item: string) {
   case 'Burn Drive':
     return 'Fire';
   case 'Chill Drive':
-    return 'Ice';
+    return 'Water';
   case 'Douse Drive':
     return 'Water';
   case 'Shock Drive':
