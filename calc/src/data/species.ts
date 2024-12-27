@@ -9051,6 +9051,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     bs: {hp: 70, at: 103, df: 85, sa: 60, sd: 85, sp: 82},
     weightkg: 42.9,
     abilities: {0: 'Big Pecks'},
+    nfe: true,
   },
   Brambleghast: {
     types: ['Grass', 'Ghost'],
@@ -10024,6 +10025,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
   //Eason Patch
   Ampharos: {abilities: {0: 'Electric Surge'}},
   Cacturne: {nfe: true},
+  Cryogonal: {nfe: true},
   Excadrill: {otherFormes: ['Excadrill-Eason']},
   Flaaffy: {abilities: {0: 'Fluffy'}},
   Granbull: {nfe: true},

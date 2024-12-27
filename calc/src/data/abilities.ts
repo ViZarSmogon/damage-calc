@@ -341,6 +341,8 @@ const SV = SS.concat([
   'Artist Block',
   'Exoskeleton',
   'Mist Rush',
+  'Stone Eater',
+  'Adrenalin',
 ]);
 
 export const ABILITIES = [[], RBY, GSC, ADV, DPP, BW, XY, SM, SS, SV];

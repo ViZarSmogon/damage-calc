@@ -179,7 +179,7 @@ export function calculateSMSSSV(
     'Thermal Exchange', 'Thick Fat', 'Unaware', 'Vital Spirit',
     'Volt Absorb', 'Water Absorb', 'Water Bubble', 'Water Veil',
     'Well-Baked Body', 'White Smoke', 'Wind Rider', 'Wonder Guard',
-    'Wonder Skin'
+    'Wonder Skin', 'Stone Eater'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -501,7 +501,8 @@ export function calculateSMSSSV(
       (move.flags.sound && !move.named('Clangorous Soul') && defender.hasAbility('Soundproof')) ||
       (move.priority > 0 && defender.hasAbility('Queenly Majesty', 'Dazzling', 'Armor Tail')) ||
       (move.hasType('Ground') && defender.hasAbility('Earth Eater')) ||
-      (move.flags.wind && defender.hasAbility('Wind Rider'))
+      (move.flags.wind && defender.hasAbility('Wind Rider')) ||
+      (move.hasType('Rock') && defender.hasAbility('Stone Eater'))
   ) {
     desc.defenderAbility = defender.ability;
     return result;
@@ -1167,7 +1168,6 @@ export function calculateBPModsSMSSSV(
       attacker.hasStatus('brn') && move.category === 'Special') ||
     (attacker.hasAbility('Toxic Boost') &&
       attacker.hasStatus('psn', 'tox') && move.category === 'Physical') ||
-    (attacker.hasAbility('Strong Jaw') && move.flags.bite) ||
     (attacker.hasAbility('Steely Spirit') && move.hasType('Steel'))
   ) {
     bpMods.push(6144);
@@ -1206,7 +1206,10 @@ export function calculateBPModsSMSSSV(
     (attacker.hasAbility('Tough Claws') && move.flags.contact) ||
     (attacker.hasAbility('Punk Rock') && move.flags.sound) || 
     (attacker.hasAbility('Mega Launcher') && (move.flags.pulse || move.flags.bullet)) ||
-    (attacker.hasAbility('Sharpness') && move.flags.slicing)
+    (attacker.hasAbility('Sharpness') && move.flags.slicing) ||
+    (attacker.hasAbility('Strong Jaw') && move.flags.bite) ||
+    (attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage)) ||
+    (attacker.hasAbility('Iron Fist') && move.flags.punch)
   ) {
     bpMods.push(5325);
     desc.attackerAbility = attacker.ability;
@@ -1215,7 +1218,10 @@ export function calculateBPModsSMSSSV(
     ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
        (attacker.hasAbility('Blaze') && move.hasType('Fire')) ||
        (attacker.hasAbility('Torrent') && move.hasType('Water')) ||
-       (attacker.hasAbility('Swarm') && move.hasType('Bug')))
+       (attacker.hasAbility('Swarm') && move.hasType('Bug')) ||
+       (attacker.hasAbility('Dragon\'s Maw') && move.hasType('Dragon')) ||
+       (attacker.hasAbility('Transistor') && move.hasType('Electric')) ||
+       (attacker.hasAbility('Stench') && move.hasType('Poison')))
   ) {
 	if (attacker.curHP() <= attacker.maxHP() / 3) {
 		bpMods.push(6144);
@@ -1251,13 +1257,6 @@ export function calculateBPModsSMSSSV(
   // However, Max Moves also don't boost -ate Abilities
   if (!move.isMax && hasAteAbilityTypeChange) {
     bpMods.push(4915);
-  }
-
-  if ((attacker.hasAbility('Reckless') && (move.recoil || move.hasCrashDamage)) ||
-      (attacker.hasAbility('Iron Fist') && move.flags.punch)
-  ) {
-    bpMods.push(4915);
-    desc.attackerAbility = attacker.ability;
   }
 
   if (gen.num <= 8 && defender.hasAbility('Heatproof') && move.hasType('Fire')) {
@@ -1410,13 +1409,9 @@ export function calculateAtModsSMSSSV(
     desc.attackerAbility = 'Flash Fire';
   } else if (
     (attacker.hasAbility('Steelworker') && move.hasType('Steel')) ||
-    (attacker.hasAbility('Dragon\'s Maw') && move.hasType('Dragon')) ||
     (attacker.hasAbility('Rocky Payload') && move.hasType('Rock'))
   ) {
     atMods.push(6144);
-    desc.attackerAbility = attacker.ability;
-  } else if (attacker.hasAbility('Transistor') && move.hasType('Electric')) {
-    atMods.push(gen.num >= 9 ? 5325 : 6144);
     desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Stakeout') && attacker.abilityOn) {
     atMods.push(8192);
@@ -1480,6 +1475,15 @@ export function calculateAtModsSMSSSV(
   }
 
   if (isQPActive(attacker, field)) {
+    if (
+      (move.category === 'Physical' && getQPBoostedStat(attacker) === 'atk') ||
+      (move.category === 'Special' && getQPBoostedStat(attacker) === 'spa')
+    ) {
+      atMods.push(5325);
+      desc.attackerAbility = attacker.ability;
+    }
+  }
+  if (attacker.hasAbility('Adrenalin') && attacker.curHP() <= attacker.maxHP() / 3) {
     if (
       (move.category === 'Physical' && getQPBoostedStat(attacker) === 'atk') ||
       (move.category === 'Special' && getQPBoostedStat(attacker) === 'spa')
@@ -1645,6 +1649,16 @@ export function calculateDfModsSMSSSV(
       dfMods.push(5324);
     }
   }
+  if (defender.hasAbility('Adrenalin') && defender.curHP() <= defender.maxHP() / 3) {
+    if (
+      (hitsPhysical && getQPBoostedStat(defender) === 'def') ||
+      (!hitsPhysical && getQPBoostedStat(defender) === 'spd')
+    ) {
+      dfMods.push(5324);
+      desc.attackerAbility = attacker.ability;
+    }
+  }
+
 
   if ((defender.hasItem('Eviolite') &&
       (defender.name === 'Dipplin' || gen.species.get(toID(defender.name))?.nfe)) ||

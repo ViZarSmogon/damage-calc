@@ -114,6 +114,8 @@ export function getFinalSpeed(gen: Generation, pokemon: Pokemon, field: Field, s
     speedMods.push(2048);
   } else if (isQPActive(pokemon, field) && getQPBoostedStat(pokemon, gen) === 'spe') {
     speedMods.push(6144);
+  } else if (pokemon.hasAbility('Adrenalin') && pokemon.curHP() <= pokemon.maxHP() / 3) {
+    speedMods.push(6144);
   }
 
   if (pokemon.hasItem('Choice Scarf')) {

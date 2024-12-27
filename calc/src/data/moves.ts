@@ -4930,6 +4930,7 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
   'Fury Swipes': {bp: 25},
   'Hyper Voice': {bp: 85},
   'Ice Fang': {bp: 75},
+  'Ice Beam': {bp: 85},
   'Ice Punch': {bp: 85},
   'Lava Plume': {bp: 70},
   'Leaf Storm': {bp: 120},
