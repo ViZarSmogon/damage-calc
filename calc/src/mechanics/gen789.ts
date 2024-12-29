@@ -423,7 +423,7 @@ export function calculateSMSSSV(
     typeEffectiveness = 1;
   }
 
-  if (typeEffectiveness === 0 && move.named('Thousand Arrows')) {
+  if (typeEffectiveness === 0 && move.named('Thousand Arrows', 'Smack Down')) {
     typeEffectiveness = 1;
   }
 

@@ -412,7 +412,7 @@ const SV: TypeChart = extend(true, {}, SS, {
   Grass: {Stellar: 1},
   Fire: {Ground: 0.5, Stellar: 1},
   Water: {Stellar: 1},
-  Electric: {Steel: 2, Stellar: 1},
+  Electric: {Stellar: 1},
   Ice: {Rock: 2, Stellar: 1},
   Flying: {Rock: 1, Stellar: 1},
   Bug: {Stellar: 1},
