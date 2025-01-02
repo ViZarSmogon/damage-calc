@@ -215,9 +215,9 @@ export function getRecoil(
 
     recoil = [minRecoilDamage, maxRecoilDamage];
     switch (gen.num) {
-    case 1:
+    case 1: case 9:
       recoil = toDisplay(notation, 1, attacker.maxHP());
-      text = '1hp damage on miss';
+      text = '1 HP recoil damage';
       break;
     case 2: case 3: case 4:
       if (defender.hasType('Ghost')) {
