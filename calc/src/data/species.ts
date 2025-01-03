@@ -9784,6 +9784,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     bs: {hp: 104, at: 75, df: 100, sa: 110, sd: 75, sp: 66},
     weightkg: 326.5,
     abilities: {0: 'Blaze'},
+    otherFormes: ['Skeledirge-Tera']
   },
   'Slither Wing': {
     types: ['Bug', 'Fighting'],
@@ -9932,6 +9933,7 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     bs: {hp: 85, at: 75, df: 77, sa: 70, sd: 105, sp: 94},
     weightkg: 112.8,
     abilities: {0: 'Mold Breaker'},
+    otherFormes: ['Tinkaton-Tera'],
   },
   Tinkatuff: {
     types: ['Fairy', 'Steel'],
@@ -10017,6 +10019,59 @@ const SV_PATCH: {[name: string]: DeepPartial<SpeciesData>} = {
     bs: {hp: 35, at: 100, df: 50, sa: 50, sd: 70, sp: 120},
     weightkg: 5.4,
     abilities: {0: 'Gooey'},
+  },
+  
+  
+  //Teraforming
+  Blissey: {otherFormes: ['Blissey-Tera']},
+  Pincurchin: {otherFormes: ['Pincurchin-Tera']},
+  Metagross: {otherFormes: ['Metagross-Tera']},
+  'Samurott-Hisui': {otherFormes: ['Samurott-Hisui-Tera']},
+  //Wooper: {otherFormes: ['Wooper-Paldea']},
+  //Wooper: {otherFormes: ['Wooper-Paldea']},
+  
+  'Skeledirge-Tera': {
+    types: ['Fire', 'Ghost'],
+    bs: {hp: 104, at: 75, df: 135, sa: 120, sd: 80, sp: 66},
+    weightkg: 326.5,
+    abilities: {0: 'Soulful Noise'},
+    baseSpecies: 'Skeledirge',
+  },
+  'Samurott-Hisui-Tera': {
+    types: ['Water', 'Dark'],
+    bs: {hp: 90, at: 113, df: 80, sa: 100, sd: 70, sp: 125},
+    weightkg: 58.2,
+    abilities: {0: 'Defiant'},
+    baseSpecies: 'Samurott-Hisui',
+  },
+  'Tinkaton-Tera': {
+    types: ['Fairy', 'Steel'],
+    bs: {hp: 85, at: 85, df: 105, sa: 82, sd: 105, sp: 94},
+    weightkg: 112.8,
+    abilities: {0: 'Uptime'},
+    baseSpecies: 'Tinkaton',
+  },
+  'Blissey-Tera': {
+    types: ['Normal', 'Fairy'],
+    bs: {hp: 255, at: 10, df: 10, sa: 95, sd: 135, sp: 75},
+    weightkg: 46.8,
+    abilities: {0: 'Serene Grace'},
+    baseSpecies: 'Blissey',
+  },
+  'Pincurchin-Tera': {
+    types: ['Electric'],
+    bs: {hp: 63, at: 91, df: 95, sa: 91, sd: 85, sp: 60},
+    weightkg: 1,
+    abilities: {0: 'Surge Surfer'},
+    baseSpecies: 'Pincurchin',
+  },
+  'Metagross-Tera': {
+    types: ['Steel', 'Psychic'],
+    bs: {hp: 80, at: 150, df: 150, sa: 115, sd: 90, sp: 70},
+    weightkg: 550,
+    gender: 'N',
+    abilities: {0: 'Technician'},
+    baseSpecies: 'Metagross',
   },
 };
 

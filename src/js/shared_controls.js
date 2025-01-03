@@ -190,6 +190,18 @@ function getForcedTeraType(pokemonName) {
 		return "Water";
 	} else if (startsWith(pokemonName, "Terapagos")) {
 		return "Stellar";
+	} else if (startsWith(pokemonName, "Skeledirge")) {
+		return "Grass";
+	} else if (startsWith(pokemonName, "Samurott-Hisui")) {
+		return "Fire";
+	} else if (startsWith(pokemonName, "Tinkaton")) {
+		return "Water";
+	} else if (startsWith(pokemonName, "Blissey")) {
+		return "Fairy";
+	} else if (startsWith(pokemonName, "Pincurchin")) {
+		return "Dragon";
+	} else if (startsWith(pokemonName, "Metagross")) {
+		return "Steel";
 	}
 	return null;
 }
@@ -600,7 +612,8 @@ $(".set-selector").change(function () {
 	if (pokemon) {
 		var pokeObj = $(this).closest(".poke-info");
 		var isAutoTera =
-		(startsWith(pokemonName, "Ogerpon") && endsWith(pokemonName, "Tera")) ||
+		((startsWith(pokemonName, "Ogerpon") || startsWith(pokemonName, "Skeledirge") || startsWith(pokemonName, "Samurott-Hisui") || startsWith(pokemonName, "Tinkaton") || 
+		startsWith(pokemonName, "Blissey") || startsWith(pokemonName, "Pincurchin") || startsWith(pokemonName, "Metagross")) && endsWith(pokemonName, "Tera")) ||
 		pokemonName === 'Terapagos-Stellar';
 		if (stickyMoves.getSelectedSide() === pokeObj.prop("id")) {
 			stickyMoves.clearStickyMove();
@@ -875,6 +888,37 @@ $(".teraToggle").change(function () {
 		var newForme = curForme === "Ogerpon-Teal-Tera" ? "Ogerpon" : curForme.slice(0, -5);
 		forme.val(newForme);
 		container.find(".ability").val(pokedex[newForme].abilities[0]);
+	} else if (
+		startsWith(curForme, "Skeledirge") || startsWith(curForme, "Samurott-Hisui") || startsWith(curForme, "Tinkaton") || 
+		startsWith(curForme, "Blissey") || startsWith(curForme, "Pincurchin") || startsWith(curForme, "Metagross")) {
+		//if (
+			//!["Skeledirge", "Samurott-Hisui", "Tinkaton", "Blissey", "Pincurchin", "Metagross"].includes(curForme) && !endsWith(curForme, "Tera")/* &&
+			//container.find(".item").val() !== curForme.split("-")[1] + " Shard"*/
+		//) return;
+		if (this.checked) {
+			var newForme = curForme + "-Tera";
+			
+			forme.val(newForme);
+			container.find(".ability").val(pokedex[newForme].abilities[0]);
+			
+			for (var property in pokedex[newForme].bs) {
+				var baseStat = container.find("." + property).find(".base");
+				baseStat.val(pokedex[newForme].bs[property]);
+				baseStat.keyup();
+			}
+			return;
+		}
+		
+		if (!endsWith(curForme, "Tera")) return;
+		var newForme = curForme.slice(0, -5);
+
+		forme.val(newForme);
+		container.find(".ability").val(pokedex[newForme].abilities[0]);
+		for (var property in pokedex[newForme].bs) {
+			var baseStat = container.find("." + property).find(".base");
+			baseStat.val(pokedex[newForme].bs[property]);
+			baseStat.keyup();
+		}
 	} else if (startsWith(curForme, "Terapagos")) {
 		if (this.checked) {
 			var newForme = "Terapagos-Stellar";
@@ -918,7 +962,8 @@ $(".forme").change(function () {
 		baseStat.keyup();
 	}
 	if (
-		(startsWith($(this).val(), "Ogerpon") && endsWith($(this).val(), "Tera")) || $(this).val() === "Terapagos-Stellar"
+		((startsWith($(this).val(), "Ogerpon") || startsWith($(this).val(), "Skeledirge") || startsWith($(this).val(), "Samurott-Hisui") || startsWith($(this).val(), "Tinkaton") || 
+		startsWith($(this).val(), "Blissey") || startsWith($(this).val(), "Pincurchin") || startsWith($(this).val(), "Metagross")) && endsWith($(this).val(), "Tera")) || $(this).val() === "Terapagos-Stellar"
 	) {
 		$(this).parent().siblings().find(".teraToggle").prop("checked", true);
 	}

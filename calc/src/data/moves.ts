@@ -4911,6 +4911,7 @@ const SV_PATCH: {[name: string]: DeepPartial<MoveData>} = {
     isWind: true,
     target: 'allAdjacentFoes',
   },
+  'Arcane Rush': {bp: 70, type: 'Dragon', category: 'Special'},
 };
 
 const SV: {[name: string]: MoveData} = extend(true, {}, SS, SV_PATCH);
