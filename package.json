@@ -43,8 +43,5 @@
   },
   "subPackages": [
     "calc"
-  ],
-  "dependencies": {
-    "@smogon/calc": "^0.10.0"
-  }
+  ]
 }
