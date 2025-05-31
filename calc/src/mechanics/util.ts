@@ -586,6 +586,8 @@ export function getStabMod(pokemon: Pokemon, move: Move, desc: RawDesc) {
   let stabMod = 4096;
   if (pokemon.hasOriginalType(move.type)) {
     stabMod += 2048;
+  } else if (pokemon.named('Terapagos-Stellar') && move.named('Tera Starstorm')) {
+    stabMod += 2048; 
   } else if (pokemon.hasAbility('Protean', 'Libero') && !pokemon.teraType) {
     stabMod += 2048;
     desc.attackerAbility = pokemon.ability;

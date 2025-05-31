@@ -201,7 +201,7 @@ export function calculateSMSSSV(
   // Merciless does not ignore Shell Armor, damage dealt to a poisoned Pokemon with Shell Armor
   // will not be a critical hit (UltiMario)
   const isCritical = !defender.hasAbility('Battle Armor', 'Shell Armor') &&
-    (move.isCrit || (attacker.hasAbility('Merciless') && defender.hasStatus('psn', 'tox'))) &&
+    (move.isCrit || ((attacker.hasAbility('Merciless') || move.named('Ruthless Fist')) && defender.hasStatus('psn', 'tox'))) &&
     move.timesUsed === 1;
 
   let type = move.type;
@@ -330,7 +330,8 @@ export function calculateSMSSSV(
     }
   }
 
-  if (move.named('Tera Blast') && attacker.teraType) {
+  if ((move.named('Tera Blast') && attacker.teraType) ||
+     (move.named('Tera Starstorm') && attacker.teraType && attacker.named('Terapagos-Stellar'))) {
     type = attacker.teraType;
   }
 
@@ -1712,6 +1713,10 @@ export function calculateFinalModsSMSSSV(
   }
 
   if (defender.hasAbility('Solid Rock', 'Filter', 'Prism Armor') && typeEffectiveness > 1) {
+    finalMods.push(3072);
+    desc.defenderAbility = defender.ability;
+  }
+  if (defender.hasAbility('Poison Puppeteer') && attacker.hasStatus('psn', 'tox')) {
     finalMods.push(3072);
     desc.defenderAbility = defender.ability;
   }

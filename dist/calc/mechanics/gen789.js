@@ -111,7 +111,7 @@ function calculateSMSSSV(gen, attacker, defender, move, field) {
         attacker.ability = '';
     }
     var isCritical = !defender.hasAbility('Battle Armor', 'Shell Armor') &&
-        (move.isCrit || (attacker.hasAbility('Merciless') && defender.hasStatus('psn', 'tox'))) &&
+        (move.isCrit || ((attacker.hasAbility('Merciless') || move.named('Ruthless Fist')) && defender.hasStatus('psn', 'tox'))) &&
         move.timesUsed === 1;
     var type = move.type;
     if (move.originalName === 'Weather Ball') {
@@ -240,7 +240,8 @@ function calculateSMSSSV(gen, attacker, defender, move, field) {
             desc.attackerAbility = attacker.ability;
         }
     }
-    if (move.named('Tera Blast') && attacker.teraType) {
+    if ((move.named('Tera Blast') && attacker.teraType) ||
+        (move.named('Tera Starstorm') && attacker.teraType && attacker.named('Terapagos-Stellar'))) {
         type = attacker.teraType;
     }
     move.type = type;
@@ -1246,6 +1247,10 @@ function calculateFinalModsSMSSSV(gen, attacker, defender, move, field, desc, is
         desc.defenderAbility = defender.ability;
     }
     if (defender.hasAbility('Solid Rock', 'Filter', 'Prism Armor') && typeEffectiveness > 1) {
+        finalMods.push(3072);
+        desc.defenderAbility = defender.ability;
+    }
+    if (defender.hasAbility('Poison Puppeteer') && attacker.hasStatus('psn', 'tox')) {
         finalMods.push(3072);
         desc.defenderAbility = defender.ability;
     }
