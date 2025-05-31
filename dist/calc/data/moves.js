@@ -3139,18 +3139,20 @@ var SS_PATCH = {
         maxPower: 1
     },
     'G-Max One Blow': {
-        bp: 130,
+        bp: 105,
         type: 'Dark',
         category: 'Physical',
         isMax: true,
+        isPunch: true,
         maxPower: 1
     },
     'G-Max Rapid Flow': {
-        bp: 45,
+        bp: 35,
         type: 'Water',
         category: 'Physical',
         multihit: 3,
         isMax: true,
+        isPunch: true,
         maxPower: 1
     },
     'G-Max Replenish': {
@@ -3498,7 +3500,7 @@ var SS_PATCH = {
         maxPower: 110
     },
     'Shell Side Arm': {
-        bp: 90,
+        bp: 85,
         type: 'Poison',
         category: 'Special',
         secondaries: true,
@@ -3619,7 +3621,7 @@ var SS_PATCH = {
     },
     Teatime: { bp: 0, type: 'Normal' },
     'Thunder Cage': {
-        bp: 80,
+        bp: 100,
         type: 'Electric',
         category: 'Special',
         zp: 160,
@@ -4203,8 +4205,7 @@ var SV_PATCH = {
         zp: 160,
         maxPower: 110,
         secondaries: true,
-        isSound: true,
-        makesContact: true
+        isSound: true
     },
     'Aqua Step': {
         bp: 80,
@@ -4772,11 +4773,11 @@ var SV_PATCH = {
         hasCrashDamage: true
     },
     'Syrup Bomb': {
-        bp: 60,
+        bp: 85,
         type: 'Grass',
         category: 'Special',
         zp: 120,
-        maxPower: 90,
+        maxPower: 110,
         isBullet: true,
         secondaries: true
     },
@@ -4913,6 +4914,30 @@ var SV_PATCH = {
         secondaries: true,
         isWind: true,
         target: 'allAdjacentFoes'
+    },
+    'Ruthless Fist': {
+        bp: 90,
+        type: 'Poison',
+        category: 'Physical',
+        makesContact: true,
+        isPunch: true,
+        zp: 200,
+        maxPower: 80
+    },
+    'Neurotoxin': {
+        bp: 100,
+        type: 'Poison',
+        category: 'Special',
+        zp: 200,
+        maxPower: 80
+    },
+    'Pernicious Plume': {
+        bp: 25,
+        type: 'Poison',
+        category: 'Special',
+        multihit: [2, 5],
+        zp: 200,
+        maxPower: 60
     }
 };
 var SV = (0, util_1.extend)(true, {}, SS, SV_PATCH);

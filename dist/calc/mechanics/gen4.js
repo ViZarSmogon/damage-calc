@@ -63,7 +63,8 @@ function calculateDPP(gen, attacker, defender, move, field) {
         result.damage = damage_1;
         return result;
     }
-    if (attacker.hasAbility('Mold Breaker')) {
+    var defenderAbilityIgnored = defender.hasAbility('Battle Armor', 'Clear Body', 'Damp', 'Dry Skin', 'Filter', 'Flash Fire', 'Flower Gift', 'Heatproof', 'Hyper Cutter', 'Immunity', 'Inner Focus', 'Insomnia', 'Keen Eye', 'Leaf Guard', 'Levitate', 'Lightning Rod', 'Limber', 'Magma Armor', 'Marvel Scale', 'Motor Drive', 'Oblivious', 'Own Tempo', 'Sand Veil', 'Shell Armor', 'Shield Dust', 'Simple', 'Snow Cloak', 'Solid Rock', 'Soundproof', 'Sticky Hold', 'Storm Drain', 'Sturdy', 'Suction Cups', 'Tangled Feet', 'Thick Fat', 'Unaware', 'Vital Spirit', 'Volt Absorb', 'Water Absorb', 'Water Veil', 'White Smoke', 'Wonder Guard');
+    if (attacker.hasAbility('Mold Breaker') && defenderAbilityIgnored) {
         defender.ability = '';
         desc.attackerAbility = attacker.ability;
     }
@@ -88,6 +89,10 @@ function calculateDPP(gen, attacker, defender, move, field) {
         desc.attackerItem = attacker.item;
         desc.moveBP = move.bp;
         desc.moveType = move.type;
+    }
+    else if (move.named('Brick Break')) {
+        field.defenderSide.isReflect = false;
+        field.defenderSide.isLightScreen = false;
     }
     if (attacker.hasAbility('Normalize') && !move.named('Struggle')) {
         move.type = 'Normal';
@@ -218,7 +223,7 @@ function calculateDPP(gen, attacker, defender, move, field) {
         damage[i] = Math.max(1, damage[i]);
     }
     result.damage = damage;
-    if ((move.dropsStats && move.timesUsed > 1) || move.hits > 1) {
+    if (move.timesUsed > 1 || move.hits > 1) {
         var origDefBoost = desc.defenseBoost;
         var origAtkBoost = desc.attackBoost;
         var numAttacks = 1;
@@ -230,7 +235,8 @@ function calculateDPP(gen, attacker, defender, move, field) {
             numAttacks = move.hits;
         }
         var usedItems = [false, false];
-        var _loop_1 = function (times) {
+        var damageMatrix = [damage];
+        for (var times = 1; times < numAttacks; times++) {
             usedItems = (0, util_1.checkMultihitBoost)(gen, attacker, defender, move, field, desc, usedItems[0], usedItems[1]);
             var newBasePower = calculateBasePowerDPP(gen, attacker, defender, move, field, desc);
             newBasePower = calculateBPModsDPP(attacker, defender, move, field, desc, newBasePower);
@@ -241,10 +247,10 @@ function calculateDPP(gen, attacker, defender, move, field) {
                 desc.isBurned = true;
             }
             baseDamage_1 = calculateFinalModsDPP(baseDamage_1, attacker, move, field, desc, isCritical);
-            var damageMultiplier = 0;
-            result.damage = result.damage.map(function (affectedAmount) {
+            var damageArray = [];
+            for (var i = 0; i < 16; i++) {
                 var newFinalDamage = 0;
-                newFinalDamage = Math.floor((baseDamage_1 * (85 + damageMultiplier)) / 100);
+                newFinalDamage = Math.floor((baseDamage_1 * (85 + i)) / 100);
                 newFinalDamage = Math.floor(newFinalDamage * stabMod);
                 newFinalDamage = Math.floor(newFinalDamage * type1Effectiveness);
                 newFinalDamage = Math.floor(newFinalDamage * type2Effectiveness);
@@ -252,13 +258,11 @@ function calculateDPP(gen, attacker, defender, move, field) {
                 newFinalDamage = Math.floor(newFinalDamage * ebeltMod);
                 newFinalDamage = Math.floor(newFinalDamage * tintedMod);
                 newFinalDamage = Math.max(1, newFinalDamage);
-                damageMultiplier++;
-                return affectedAmount + newFinalDamage;
-            });
-        };
-        for (var times = 1; times < numAttacks; times++) {
-            _loop_1(times);
+                damageArray[i] = newFinalDamage;
+            }
+            damageMatrix[times] = damageArray;
         }
+        result.damage = damageMatrix;
         desc.defenseBoost = origDefBoost;
         desc.attackBoost = origAtkBoost;
     }
@@ -354,6 +358,10 @@ function calculateBPModsDPP(attacker, defender, move, field, desc, basePower) {
         basePower = Math.floor(basePower * 1.5);
         desc.isHelpingHand = true;
     }
+    if (attacker.hasAbility('Technician') && basePower <= 60) {
+        basePower = Math.floor(basePower * 1.5);
+        desc.attackerAbility = attacker.ability;
+    }
     var isPhysical = move.category === 'Physical';
     if ((attacker.hasItem('Muscle Band') && isPhysical) ||
         (attacker.hasItem('Wise Glasses') && !isPhysical)) {
@@ -382,8 +390,7 @@ function calculateBPModsDPP(attacker, defender, move, field, desc, basePower) {
         ((attacker.hasAbility('Overgrow') && move.hasType('Grass')) ||
             (attacker.hasAbility('Blaze') && move.hasType('Fire')) ||
             (attacker.hasAbility('Torrent') && move.hasType('Water')) ||
-            (attacker.hasAbility('Swarm') && move.hasType('Bug')))) ||
-        (attacker.hasAbility('Technician') && basePower <= 60)) {
+            (attacker.hasAbility('Swarm') && move.hasType('Bug'))))) {
         basePower = Math.floor(basePower * 1.5);
         desc.attackerAbility = attacker.ability;
     }

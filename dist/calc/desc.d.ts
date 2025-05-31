@@ -27,6 +27,7 @@ export interface RawDesc {
     isAuroraVeil?: boolean;
     isFlowerGiftAttacker?: boolean;
     isFlowerGiftDefender?: boolean;
+    isSteelySpiritAttacker?: boolean;
     isFriendGuard?: boolean;
     isHelpingHand?: boolean;
     isCritical?: boolean;
@@ -57,7 +58,7 @@ export declare function getRecoil(gen: Generation, attacker: Pokemon, defender: 
     recoil: number | [number, number];
     text: string;
 };
-export declare function getKOChance(gen: Generation, attacker: Pokemon, defender: Pokemon, move: Move, field: Field, damage: Damage, err?: boolean): {
+export declare function getKOChance(gen: Generation, attacker: Pokemon, defender: Pokemon, move: Move, field: Field, damageObj: Damage, err?: boolean): {
     chance: number | undefined;
     n: number;
     text: string;
