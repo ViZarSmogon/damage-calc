@@ -347,6 +347,7 @@ function autosetWeather(ability, i) {
 	switch (ability) {
 	case "Drought":
 	case "Orichalcum Pulse":
+	case "Leader of the Pride":
 		lastAutoWeather[i] = "Sun";
 		$("#sun").prop("checked", true);
 		break;
@@ -1672,6 +1673,7 @@ function isPokeInfoGrounded(pokeInfo) {
 		  teraType ? teraType !== "Flying" : pokeInfo.find(".type1").val() !== "Flying" &&
         teraType ? teraType !== "Flying" : pokeInfo.find(".type2").val() !== "Flying" &&
         pokeInfo.find(".ability").val() !== "Levitate" &&
+		pokeInfo.find(".ability").val() !== "Ion Battery" &&
         pokeInfo.find(".item").val() !== "Air Balloon"
 	);
 }

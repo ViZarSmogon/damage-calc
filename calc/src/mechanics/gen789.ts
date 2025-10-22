@@ -91,6 +91,7 @@ export function calculateSMSSSV(
     attacker.boosts.spa +=
       attacker.hasAbility('Simple') ? 2
       : attacker.hasAbility('Contrary') ? -1
+	  : attacker.hasAbility('Contrarian') ? -2
       : 1;
     // restrict to +- 6
     attacker.boosts.spa = Math.min(6, Math.max(-6, attacker.boosts.spa));
@@ -177,7 +178,9 @@ export function calculateSMSSSV(
     'Thermal Exchange', 'Thick Fat', 'Unaware', 'Vital Spirit',
     'Volt Absorb', 'Water Absorb', 'Water Bubble', 'Water Veil',
     'Well-Baked Body', 'White Smoke', 'Wind Rider', 'Wonder Guard',
-    'Wonder Skin'
+    'Wonder Skin',
+	
+	'Protective Thorns', 'Contrarian', 'Ion Battery'
   );
 
   const attackerIgnoresAbility = attacker.hasAbility('Mold Breaker', 'Teravolt', 'Turboblaze');
@@ -480,8 +483,8 @@ export function calculateSMSSSV(
         defender.hasAbility('Lightning Rod', 'Motor Drive', 'Volt Absorb')) ||
       (move.hasType('Ground') &&
         !field.isGravity && !move.named('Thousand Arrows') &&
-        !defender.hasItem('Iron Ball') && defender.hasAbility('Levitate')) ||
-      (move.flags.bullet && defender.hasAbility('Bulletproof')) ||
+        !defender.hasItem('Iron Ball') && defender.hasAbility('Levitate', 'Ion Battery')) ||
+      (move.flags.bullet && defender.hasAbility('Bulletproof', 'Protective Thorns')) ||
       (move.flags.sound && !move.named('Clangorous Soul') && defender.hasAbility('Soundproof')) ||
       (move.priority > 0 && defender.hasAbility('Queenly Majesty', 'Dazzling', 'Armor Tail')) ||
       (move.hasType('Ground') && defender.hasAbility('Earth Eater')) ||
@@ -1396,6 +1399,11 @@ export function calculateAtModsSMSSSV(
   ) {
     atMods.push(6144);
     desc.attackerAbility = attacker.ability;
+  } else if (
+    (attacker.hasAbility('Ion Battery') && move.category === 'Special')
+  ) {
+    atMods.push(6144);
+    desc.attackerAbility = attacker.ability;
   } else if (attacker.hasAbility('Transistor') && move.hasType('Electric')) {
     atMods.push(gen.num >= 9 ? 5325 : 6144);
     desc.attackerAbility = attacker.ability;
@@ -1469,7 +1477,7 @@ export function calculateAtModsSMSSSV(
   if (
     (attacker.hasAbility('Hadron Engine') && move.category === 'Special' &&
       field.hasTerrain('Electric')) ||
-    (attacker.hasAbility('Orichalcum Pulse') && move.category === 'Physical' &&
+    (((attacker.hasAbility('Orichalcum Pulse') && move.category === 'Physical') || (attacker.hasAbility('Leader of the Pride') && move.category === 'Special')) &&
       field.hasWeather('Sun', 'Harsh Sunshine') && !attacker.hasItem('Utility Umbrella'))
   ) {
     atMods.push(5461);
