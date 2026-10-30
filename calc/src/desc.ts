@@ -43,6 +43,7 @@ export interface RawDesc {
   isReflect?: boolean;
   isBattery?: boolean;
   isPowerSpot?: boolean;
+  isCharge?: boolean;
   isWonderRoom?: boolean;
   isSwitching?: 'out' | 'in';
   moveBP?: number;
@@ -526,7 +527,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
         ? rockType.effectiveness[defender.teraType]!
         : rockType.effectiveness[defender.types[0]]! *
           (defender.types[1] ? rockType.effectiveness[defender.types[1]]! : 1);
-    damage += Math.floor((effectiveness * defender.maxHP()) / 8);
+    damage += Math.max(Math.floor((effectiveness * defender.maxHP()) / 8), 1);
     texts.push('Stealth Rock');
   }
   if (defenderSide.steelsurge && !defender.hasAbility('Magic Guard', 'Mountaineer')) {
@@ -536,7 +537,7 @@ function getHazards(gen: Generation, defender: Pokemon, defenderSide: Side) {
         ? steelType.effectiveness[defender.teraType]!
         : steelType.effectiveness[defender.types[0]]! *
           (defender.types[1] ? steelType.effectiveness[defender.types[1]]! : 1);
-    damage += Math.floor((effectiveness * defender.maxHP()) / 8);
+    damage += Math.max(Math.floor((effectiveness * defender.maxHP()) / 8), 1);
     texts.push('Steelsurge');
   }
 
@@ -651,6 +652,13 @@ function getEndOfTurn(
     }
   }
 
+  if (field.defenderSide.isNightmared) {
+    if (!defender.hasAbility('Magic Guard')) {
+      damage -= Math.floor(defender.maxHP() / 4);
+      texts.push('Nightmare damage');
+    }
+  }
+
   if (field.attackerSide.isSeeded && !attacker.hasAbility('Magic Guard')) {
     let recovery = Math.floor(attacker.maxHP() / (gen.num === 0 || gen.num >= 2 ? 8 : 16));
     if (defender.hasItem('Big Root')) recovery = Math.trunc(recovery * 5324 / 4096);
@@ -711,10 +719,12 @@ function getEndOfTurn(
     (gen.num === 0 || gen.num > 1)
   ) {
     if (attacker.hasItem('Binding Band')) {
-      damage -= gen.num > 5 ? Math.floor(defender.maxHP() / 6) : Math.floor(defender.maxHP() / 8);
+      damage -= gen.num === 0 || gen.num > 5
+        ? Math.floor(defender.maxHP() / 6) : Math.floor(defender.maxHP() / 8);
       texts.push('trapping damage');
     } else {
-      damage -= gen.num > 5 ? Math.floor(defender.maxHP() / 8) : Math.floor(defender.maxHP() / 16);
+      damage -= gen.num === 0 || gen.num > 5
+        ? Math.floor(defender.maxHP() / 8) : Math.floor(defender.maxHP() / 16);
       texts.push('trapping damage');
     }
   }
@@ -1014,6 +1024,9 @@ function buildDescription(description: RawDesc, attacker: Pokemon, defender: Pok
   }
   if (description.isSwitching) {
     output += 'switching boosted ';
+  }
+  if (description.isCharge) {
+    output += 'Charge boosted ';
   }
   output += description.moveName + ' ';
   if (description.moveBP && description.moveType) {

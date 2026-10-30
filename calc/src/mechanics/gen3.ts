@@ -172,7 +172,7 @@ export function calculateADV(
     const origDefBoost = desc.defenseBoost;
     const origAtkBoost = desc.attackBoost;
     let numAttacks = 1;
-    if (move.dropsStats && move.timesUsed! > 1) {
+    if (move.timesUsed! > 1) {
       desc.moveTurns = `over ${move.timesUsed} turns`;
       numAttacks = move.timesUsed!;
     } else {
@@ -184,7 +184,7 @@ export function calculateADV(
       usedItems = checkMultihitBoost(gen, attacker, defender, move,
         field, desc, usedItems[0], usedItems[1]);
       const newAt = calculateAttackADV(gen, attacker, defender, move, desc, isCritical);
-      let newBp = calculateBasePowerADV(attacker, defender, move, desc);
+      let newBp = calculateBasePowerADV(attacker, defender, move, desc, times + 1);
       newBp = calculateBPModsADV(attacker, move, desc, newBp);
       let newBaseDmg = Math.floor(
         Math.floor((Math.floor((2 * lv) / 5 + 2) * newAt * newBp) / df) / 50
@@ -269,6 +269,7 @@ export function calculateBPModsADV(
     basePower = Math.floor(basePower * 1.5);
     desc.attackerAbility = attacker.ability;
   }
+
   return basePower;
 }
 
@@ -436,6 +437,11 @@ function calculateFinalModsADV(
   if (move.named('Weather Ball') && field.weather) {
     baseDamage *= 2;
     desc.moveBP = move.bp * 2;
+  }
+
+  if (field.attackerSide.isCharge && move.hasType('Electric')) {
+    baseDamage *= 2;
+    desc.isCharge = true;
   }
 
   if (field.attackerSide.isHelpingHand) {

@@ -274,7 +274,7 @@ $(".ability").bind("keyup change", function () {
 
 	var TOGGLE_ABILITIES = {
 		on: ['Intimidate', 'Slow Start', 'Teraform Zero'],
-		off: ['Flash Fire', 'Minus', 'Plus', 'Unburden', 'Analytic', 'Stakeout'],
+		off: ['Flash Fire', 'Minus', 'Plus', 'Unburden', 'Analytic', 'Stakeout', 'Electromorphosis'],
 	};
 
 	if (gen !== 8) {
@@ -373,7 +373,7 @@ function autosetWeather(ability, i) {
 		$("#sand").prop("checked", true);
 		break;
 	case "Snow Warning":
-		if (gen >= 9) {
+		if (gen === 0 || gen >= 9) {
 			lastAutoWeather[i] = "Snow";
 			$("#snow").prop("checked", true);
 		} else {
@@ -455,22 +455,29 @@ $(".status").bind("keyup change", function () {
 	}
 });
 
+$(".max").change(function () {
+	var maxState = $(this).prop("checked");
+	var pokeObj = $(this).closest(".poke-info");
+	pokeObj.find(".move-crit").each(function () {
+		if ($(this).attr("autocrit") === "yes") $(this).prop("checked", !maxState);
+	});
+});
+
 $(".teraType").change(function () {
 	var pokeObj = $(this).closest(".poke-info");
 	var checked = pokeObj.find(".teraToggle").prop("checked");
 	stellarButtonsVisibility(pokeObj, $(this).val() === "Stellar" && checked);
 });
 
-var lockerMove = "";
 // auto-update move details on select
 $(".move-selector").change(function () {
+	var pokeObj = $(this).closest(".poke-info");
 	var moveName = $(this).val();
 	var move = moves[moveName] || moves['(No Move)'];
 	var moveGroupObj = $(this).parent();
 	moveGroupObj.children(".move-bp").val(moveName === 'Present' ? 40 : move.bp);
 	var m = moveName.match(HIDDEN_POWER_REGEX);
 	if (m) {
-		var pokeObj = $(this).closest(".poke-info");
 		var pokemon = createPokemon(pokeObj);
 		var actual = calc.Stats.getHiddenPower(GENERATION, pokemon.ivs);
 		if (actual.type !== m[1]) {
@@ -500,7 +507,6 @@ $(".move-selector").change(function () {
 		}
 	} else if (gen >= 2 && gen <= 6 && HIDDEN_POWER_REGEX.test($(this).attr('data-prev'))) {
 		// If this selector was previously Hidden Power but now isn't, reset all IVs/DVs to max.
-		var pokeObj = $(this).closest(".poke-info");
 		for (var i = 0; i < LEGACY_STATS[gen].length; i++) {
 			var legacyStat = LEGACY_STATS[gen][i];
 			pokeObj.find("." + legacyStat + " .ivs").val(31);
@@ -510,10 +516,8 @@ $(".move-selector").change(function () {
 	$(this).attr('data-prev', moveName);
 	moveGroupObj.children(".move-type").val(move.type);
 	moveGroupObj.children(".move-cat").val(move.category);
-	var isDynamaxed = $(this).closest(".poke-info").find(".max").prop("checked");
-	moveGroupObj.children(".move-crit").prop("checked", !isDynamaxed && move.willCrit === true);
-
 	var stat = move.category === 'Special' ? 'spa' : 'atk';
+
 	if (Array.isArray(move.multihit) || (!isNaN(move.multihit) && move.multiaccuracy)) {
 		moveGroupObj.children(".move-times").hide();
 		moveGroupObj.children(".move-times").val(1);
@@ -550,6 +554,9 @@ $(".move-selector").change(function () {
 		moveGroupObj.children(".move-hits").hide();
 		moveGroupObj.children(".move-times").show();
 	}
+	var isDynamaxed = pokeObj.find(".max").prop("checked");
+	moveGroupObj.children(".move-crit").prop("checked", !isDynamaxed && move.willCrit === true);
+	moveGroupObj.find(".move-crit").attr("autocrit", move.willCrit ? "yes" : "no");
 	moveGroupObj.children(".move-z").prop("checked", false);
 });
 
@@ -1286,8 +1293,10 @@ function createField() {
 	var isLightScreen = [$("#lightScreenL").prop("checked"), $("#lightScreenR").prop("checked")];
 	var isProtected = [$("#protectL").prop("checked"), $("#protectR").prop("checked")];
 	var isSeeded = [$("#leechSeedL").prop("checked"), $("#leechSeedR").prop("checked")];
+	var isNightmared = [$("#nightmareL").prop("checked"), $("#nightmareR").prop("checked")];
 	var isSaltCured = [$("#saltCureL").prop("checked"), $("#saltCureR").prop("checked")];
 	var isForesight = [$("#foresightL").prop("checked"), $("#foresightR").prop("checked")];
+	var isCharge = [$("#chargeL").prop("checked"), $("#chargeR").prop("checked")];
 	var isHelpingHand = [$("#helpingHandL").prop("checked"), $("#helpingHandR").prop("checked")];
 	var isTailwind = [$("#tailwindL").prop("checked"), $("#tailwindR").prop("checked")];
 	var isFlowerGift = [$("#flowerGiftL").prop("checked"), $("#flowerGiftR").prop("checked")];
@@ -1313,8 +1322,10 @@ function createField() {
 			isLightScreen: isLightScreen[i],
 			isProtected: isProtected[i],
 			isSeeded: isSeeded[i],
+			isNightmared: isNightmared[i],
 			isSaltCured: isSaltCured[i],
 			isForesight: isForesight[i],
+			isCharge: isCharge[i],
 			isTailwind: isTailwind[i],
 			isHelpingHand: isHelpingHand[i],
 			isFlowerGift: isFlowerGift[i],

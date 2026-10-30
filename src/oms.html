@@ -541,7 +541,7 @@
                 <input class="current-hp calc-trigger" id="currentHpL1" value="341" />/<span class="max-hp">341</span> (
                 <input class="percent-hp calc-trigger" value="100" />%)
                 <input class="visually-hidden max calc-trigger btn-input" type="checkbox" id="maxL" />
-                <label class="btn max-btn gen-specific g8 hide" for="maxL" title="Use the corresponding Max Move?">Dynamax</label>
+                <label class="btn max-btn gen-specific g8" for="maxL" title="Use the corresponding Max Move?">Dynamax</label>
                 <br />
                 <br />
                 Health <div class="hpbar"></div>
@@ -957,6 +957,18 @@
                             <td><div class="right" title="Has this Pok&eacute;mon been affected by Leech Seed?">
                                 <input aria-describedby="selectLeechSeedInstruction" class="visually-hidden calc-trigger" type="checkbox" id="leechSeedR" />
                                 <label class="btn btn-wide" for="leechSeedR">Leech Seed</label>
+                            </div></td>
+                        </tr>
+                        <tr class="gen-specific g2 g3 g4 g5 g6 g7 g8 g9">
+                            <td><div class="left" title="Has this Pok&eacute;mon been affected by Nightmare?">
+                                <div hidden id="selectLeechSeedInstruction">Has this Pok&eacute;mon been affected by Nightmare?</div>
+                                <input aria-describedby="selectNightmareInstruction" class="visually-hidden calc-trigger" type="checkbox" id="nightmareL" />
+                                <label class="btn btn-wide" for="nightmareL">Nightmare</label>
+                            </div></td>
+                            <td><div class="right" title="Has this Pok&eacute;mon been affected by Nightmare?">
+                                <div hidden id="selectLeechSeedInstruction">Has this Pok&eacute;mon been affected by Nightmare?</div>
+                                <input aria-describedby="selectNightmareInstruction" class="visually-hidden calc-trigger" type="checkbox" id="nightmareR" />
+                                <label class="btn btn-wide" for="nightmareR">Nightmare</label>
                             </div></td>
                         </tr>
                         <tr class="gen-specific g9">
@@ -1511,7 +1523,7 @@
                 <input class="current-hp calc-trigger" id="currentHpR1" value="341" />/<span class="max-hp">341</span> (
                 <input class="percent-hp calc-trigger" value="100" />%)
                 <input class="visually-hidden max calc-trigger btn-input" type="checkbox" id="maxR" />
-                <label class="btn max-btn gen-specific g8 hide" for="maxR" title="Use the corresponding Max Move?">Dynamax</label>
+                <label class="btn max-btn gen-specific g8" for="maxR" title="Use the corresponding Max Move?">Dynamax</label>
                 <br />
                 <br />
                 Health <div class="hpbar"></div>

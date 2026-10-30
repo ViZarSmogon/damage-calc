@@ -407,7 +407,8 @@ export function calculateBWXY(
         move,
         field,
         hasAteAbilityTypeChange,
-        desc
+        desc,
+        times + 1
       );
       const newBaseDamage = getBaseDamage(attacker.level, newBasePower, newAtk, newDef);
       const newFinalMods = calculateFinalModsBWXY(
@@ -636,8 +637,8 @@ export function calculateBPModsBWXY(
   // The last case only applies when the Pokemon is holding the Mega Stone that matches its species
   // (or when it's already a Mega-Evolution)
   if (!resistedKnockOffDamage && defenderItem) {
-    const item = gen.items.get(toID(defenderItem))!;
-    resistedKnockOffDamage = !!(item.megaStone &&
+    const item = gen.items.get(toID(defenderItem));
+    resistedKnockOffDamage = !!(item?.megaStone &&
       (item.megaStone[defender.name] || Object.values(item.megaStone).includes(defender.name)));
   }
 
@@ -645,7 +646,6 @@ export function calculateBPModsBWXY(
   if (!resistedKnockOffDamage && hit > 1 && !defender.hasAbility('Sticky Hold')) {
     resistedKnockOffDamage = true;
   }
-
 
   // Use BasePower after moves with custom BP to determine if Technician should boost
   if ((attacker.hasAbility('Technician') && basePower <= 60) ||
@@ -673,6 +673,11 @@ export function calculateBPModsBWXY(
   ) {
     bpMods.push(4915);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (field.attackerSide.isCharge && move.hasType('Electric')) {
+    bpMods.push(8192);
+    desc.isCharge = true;
   }
 
   if (defender.hasAbility('Heatproof') && move.hasType('Fire')) {

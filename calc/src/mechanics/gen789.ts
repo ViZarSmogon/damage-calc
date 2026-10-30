@@ -141,8 +141,10 @@ export function calculateSMSSSV(
     move.flags.contact = 1;
   }
 
-  const breaksProtect = move.breaksProtect || move.isZ || attacker.isDynamaxed ||
-  (attacker.hasAbility('Unseen Fist', 'Piercing Drill') && move.flags.contact);
+  const breaksProtect = !defender.isDynamaxed &&
+  (move.breaksProtect || move.isZ || attacker.isDynamaxed ||
+  (attacker.hasAbility('Unseen Fist', 'Piercing Drill') && move.flags.contact)) ||
+  move.name === 'G-Max One Blow' || move.name === 'G-Max Rapid Flow';
 
   if (field.defenderSide.isProtected && !breaksProtect) {
     desc.isProtected = true;
@@ -330,6 +332,10 @@ export function calculateSMSSSV(
     field.defenderSide.isAuroraVeil = false;
   }
 
+  if (attacker.hasAbility('Electromorphosis') && attacker.abilityOn) {
+    field.attackerSide.isCharge = true;
+  }
+
   let hasAteAbilityTypeChange = false;
   let isAerilate = false;
   let isPixilate = false;
@@ -364,7 +370,7 @@ export function calculateSMSSSV(
       type = 'Ice';
     } else if ((isNormalize = attacker.hasAbility('Normalize'))) { // Boosts any type
       type = 'Normal';
-    } else if ((isDragonize = attacker.hasAbility('Dragonize')) && normal) {
+    } else if ((isDragonize = attacker.hasAbility('Dragonize') && normal)) {
       type = 'Dragon';
     }
     if (isGalvanize || isPixilate || isRefrigerate || isAerilate || isNormalize || isDragonize) {
@@ -647,12 +653,14 @@ export function calculateSMSSSV(
   );
 
   let protect = false;
-  if (field.defenderSide.isProtected &&
-    (attacker.isDynamaxed ||
-      attacker.hasAbility('Unseen Fist', 'Piercing Drill') ||
-      (move.isZ && attacker.item && attacker.item.includes(' Z')))) {
-    protect = true;
-    desc.isProtected = true;
+  if (field.defenderSide.isProtected) {
+    if (attacker.isDynamaxed &&
+    !(move.name === 'G-Max One Blow' || move.name === 'G-Max Rapid Flow') ||
+    !attacker.isDynamaxed && (attacker.hasAbility('Unseen Fist', 'Piercing Drill') ||
+    (move.isZ && attacker.item && attacker.item.includes(' Z')))) {
+      protect = true;
+      desc.isProtected = true;
+    }
   }
 
   const finalMod = chainMods(finalMods, 41, 131072);
@@ -1068,8 +1076,8 @@ export function calculateBPModsSMSSSV(
   // The last case only applies when the Pokemon has the Mega Stone that matches its species
   // (or when it's already a Mega-Evolution)
   if (!resistedKnockOffDamage && defenderItem) {
-    const item = gen.items.get(toID(defenderItem))!;
-    resistedKnockOffDamage = !!(item.megaStone &&
+    const item = gen.items.get(toID(defenderItem));
+    resistedKnockOffDamage = !!(item?.megaStone &&
       (item.megaStone[defender.name] || Object.values(item.megaStone).includes(defender.name)));
   }
 
@@ -1173,6 +1181,11 @@ export function calculateBPModsSMSSSV(
   ) {
     bpMods.push(6144);
     desc.attackerAbility = attacker.ability;
+  }
+
+  if (field.attackerSide.isCharge && move.hasType('Electric')) {
+    bpMods.push(8192);
+    desc.isCharge = true;
   }
 
   const aura = `${move.type} Aura`;
@@ -1758,7 +1771,8 @@ export function calculateFinalModsSMSSSV(
     desc.defenderAbility = defender.ability;
   }
 
-  if (defender.hasAbility('Fluffy') && move.flags.contact && !attacker.hasAbility('Long Reach')) {
+  const halveContactMoveDmg = defender.hasAbility('Fluffy') || defender.hasAbility('Aura Guard');
+  if (halveContactMoveDmg && move.flags.contact && !attacker.hasAbility('Long Reach')) {
     finalMods.push(2048);
     desc.defenderAbility = defender.ability;
   } else if (

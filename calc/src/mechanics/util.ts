@@ -230,7 +230,8 @@ export function checkIntimidate(gen: Generation, source: Pokemon, target: Pokemo
   const blocked =
     target.hasAbility('Clear Body', 'White Smoke', 'Hyper Cutter', 'Full Metal Body') ||
     // More abilities now block Intimidate in Gen 8+ (DaWoblefet, Cloudy Mistral)
-    (gen.num >= 8 && target.hasAbility('Inner Focus', 'Own Tempo', 'Oblivious', 'Scrappy')) ||
+    ((gen.num >= 8 || gen.num === 0) &&
+      target.hasAbility('Inner Focus', 'Own Tempo', 'Oblivious', 'Scrappy')) ||
     target.hasItem('Clear Amulet');
   if (source.hasAbility('Intimidate') && source.abilityOn && !blocked) {
     if (target.hasAbility('Contrary', 'Defiant', 'Guard Dog')) {
@@ -663,10 +664,18 @@ export function getStatDescriptionText(
 ): string {
   const initialStat: StatID = stat;
   if (wonderRoomActive) {
-    if (stat === 'def') { stat = 'spd'; } else if (stat === 'spd') { stat = 'def'; }
+    if (stat === 'def') {
+      stat = 'spd';
+    } else if (stat === 'spd') {
+      stat = 'def';
+    }
   }
   if (powerTrickActive) {
-    if (stat === 'atk') { stat = 'def'; } else if (stat === 'def') { stat = 'atk'; }
+    if (stat === 'atk') {
+      stat = 'def';
+    } else if (stat === 'def') {
+      stat = 'atk';
+    }
   }
   //  decoding what checkRawStatChanges does
   const nature = gen.natures.get(toID(pokemon.nature))!;
@@ -674,11 +683,8 @@ export function getStatDescriptionText(
     (stat === 'hp' || nature.plus === nature.minus ? ''
     : nature.plus === stat ? '+'
     : nature.minus === stat ? '-'
-    : '') + ' ' +
-     Stats.displayStat(initialStat);
-  if (stat !== initialStat) {
-    desc = desc + ' (' + Stats.displayStat(stat) + ')';
-  }
+    : '') + ' ' + Stats.displayStat(initialStat);
+  if (stat !== initialStat) desc += ' (' + Stats.displayStat(stat) + ')';
   const iv = pokemon.ivs[stat];
   if (iv !== 31) desc += ` ${iv} IVs`;
   return desc;

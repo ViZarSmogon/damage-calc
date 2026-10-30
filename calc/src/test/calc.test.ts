@@ -931,8 +931,24 @@ describe('calc', () => {
         });
       });
     });
-  });
 
+    describe('Charge', () => {
+      inGens([0, [3, 9]], ({gen, calculate, Pokemon, Move, Field}) => {
+        test('Charge should double the Base Power of Electric-type moves', () => {
+          const attacker = Pokemon('Pikachu');
+          const defender = Pokemon('Pikachu');
+          const move = Move('Thunderbolt');
+          const field = Field({attackerSide: {isCharge: true}});
+
+          const noCharge = calculate(attacker, defender, move);
+          const charge = calculate(attacker, defender, move, field);
+
+          expect(charge.range()[0]).toBeGreaterThan(noCharge.range()[0]);
+          expect(charge.range()[1]).toBeGreaterThan(noCharge.range()[1]);
+        });
+      });
+    });
+  });
 
   describe('Gen 1', () => {
     inGen(1, ({calculate, Pokemon, Move, Field}) => {
@@ -1937,6 +1953,17 @@ describe('calc', () => {
           expect(snowResult.range()[0]).toEqual(noSnowResult.range()[0]);
           expect(snowResult.range()[1]).toEqual(noSnowResult.range()[1]);
         });
+      });
+
+      test('items absent from the format should not crash the calc', () => {
+        const attacker = Pokemon('Kingambit', {nature: 'Adamant'});
+        const holder = Pokemon('Incineroar', {nature: 'Impish', item: 'Black Sludge'});
+        const result = calculate(attacker, holder, Move('Iron Head'));
+        expect(result.range()[1]).toBeGreaterThan(0);
+
+        const vsHolder = calculate(attacker, holder, Move('Knock Off'));
+        const vsItemless = calculate(attacker, Pokemon('Incineroar', {nature: 'Impish'}), Move('Knock Off'));
+        expect(vsHolder.range()[1]).toBeGreaterThan(vsItemless.range()[1]);
       });
     });
   });
